@@ -22,6 +22,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from clerk.views import IsAdmin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +30,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('clerk/', include('clerk.urls')),
+    path('isadmin/<int:id>/', IsAdmin.as_view(), name='isadmin'),
 ]
 
 if settings.DEBUG:

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status
 import jwt 
+from django.shortcuts import get_object_or_404
 
 from clerk.serializers import ClerkSerializer, ClerkCreateSerializer
 from .models import Clerk
@@ -56,15 +57,21 @@ class ClerkViewSet(viewsets.ModelViewSet):
 
 class DecodeJWT(generics.GenericAPIView):
     def post(self, request):
-        if request.method == 'POST':
-            token = request.data.get('token')
-            decoded = jwt.decode(token, options={"verify_signature": False})
-            user = User.objects.get(id=decoded['user_id'])
-            clerk = Clerk.objects.get(username=user.username)
-            decoded['clerk_id'] = clerk.id
-            res = {}
-            res['user_id'] = decoded['user_id']
-            res['clerk_id'] = decoded['clerk_id']
-            return Response(res, status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+        token = request.data.get('token')
+        decoded = jwt.decode(token, options={"verify_signature": False})
+        user = User.objects.get(id=decoded['user_id'])
+        clerk = Clerk.objects.get(username=user.username)
+        decoded['clerk_id'] = clerk.id
+        res = {}
+        res['user_id'] = decoded['user_id']
+        res['clerk_id'] = decoded['clerk_id']
+        return Response(res, status=status.HTTP_200_OK)
+
+class IsAdmin(generics.GenericAPIView):
+    def get(self, request, id):
+        user = get_object_or_404(User, pk=id)
+
+        res = {}
+        res['is_admin'] = user.is_superuser
+
+        return Response(res, status=status.HTTP_200_OK)
