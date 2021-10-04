@@ -1,37 +1,57 @@
 from rest_framework import serializers
 from .models import Clerk
+from django.contrib.auth.models import User
 
+
+class UserCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password', 'first_name', 'last_name')
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name')
+
+
+class ClerkCreateSerializer(serializers.ModelSerializer):
+    user = UserCreateSerializer()
+
+    class Meta:
+        model = Clerk
+        fields = ('user', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact')
+
+    def create(self, validated_data):
+        user = validated_data.pop('user', None)
+        user = User.objects.create(**user)
+        return Clerk.objects.create(**validated_data)
 
 
 class ClerkSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
     class Meta:
         model = Clerk
-        fields = ('username', 'name', 'password', 'email', 'type', 'rank', 'address', 'unit', 'subunit', 'contact')
+        fields = ('user', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact')
+    
+    def update(self, instance, validated_data):
+        user = instance.user
+        userdata = validated_data.pop('user', None)
+        user.username = userdata.get('username', user.username)
+        user.email = userdata.get('username', user.email)
+        user.first_name = userdata.get('first_name', user.first_name)
+        user.last_name = userdata.get('first_name', user.last_name)
+        user.save()
 
-
-
-class ClerkCreateSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=50)
-    name = serializers.CharField(max_length=100)
-    password = serializers.CharField(max_length=100)
-    email = serializers.EmailField(max_length=100)
-    rank = serializers.CharField(max_length=20)
-    address = serializers.CharField(max_length=100)
-    unit = serializers.CharField(max_length=30)
-    subunit = serializers.CharField(max_length=30)
-    contact = serializers.CharField(max_length=50)
-
-
-# class UserCreateSerializer(serializers.ModelSerializer):
-
-#     class Meta:
-#         model = Clerk
-#         fields = ('username', 'email', 'password', 'first_name', 'last_name')
-
-
-# class ClerkCreateSerializer(serializers.ModelSerializer):
-#     user = UserCreateSerializer()
-
-#     class Meta:
-#         model = Clerk
-#         fields = ('user', 'type', 'rank', 'address', 'unit', 'subunit', 'contact')
+        instance.user = user
+        instance.name = validated_data.get('name', instance.name)
+        instance.password = validated_data.get('password', instance.password)
+        instance.rank = validated_data.get('rank', instance.rank)
+        instance.address = validated_data.get('address', instance.address)
+        instance.unit = validated_data.get('unit', instance.unit)
+        instance.subunit = validated_data.get('subunit', instance.subunit)
+        instance.contact = validated_data.get('contact', instance.contact)
+        instance.save()
+        return instance

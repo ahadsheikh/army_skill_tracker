@@ -29,7 +29,7 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    path('clerk/', include('clerk.urls')),
+    path('clerk-page/', include('clerk.urls')),
     path('isadmin/<int:id>/', IsAdmin.as_view(), name='isadmin'),
 ]
 

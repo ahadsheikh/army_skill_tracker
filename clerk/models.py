@@ -12,11 +12,9 @@ class Clerk(models.Model):
     """
     Clerk model
     """
-    username = models.CharField(max_length=50, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    type = models.CharField(max_length=1, choices=USER_TYPE_CHOICES, default='C')
     rank = models.CharField(max_length=20)
     address = models.CharField(max_length=100)
     unit = models.CharField(max_length=20)
