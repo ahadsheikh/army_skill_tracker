@@ -26,6 +26,7 @@ class ClerkCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = validated_data.pop('user', None)
         user = User.objects.create(**user)
+        validated_data['user'] = user
         return Clerk.objects.create(**validated_data)
 
 
@@ -55,3 +56,7 @@ class ClerkSerializer(serializers.ModelSerializer):
         instance.contact = validated_data.get('contact', instance.contact)
         instance.save()
         return instance
+
+
+class ImageUploadSerializer(serializers.Serializer):
+    image = serializers.ImageField()

@@ -7,7 +7,7 @@ from rest_framework import status
 import jwt 
 from django.shortcuts import get_object_or_404
 
-from clerk.serializers import ClerkSerializer, ClerkCreateSerializer
+from clerk.serializers import ClerkSerializer, ClerkCreateSerializer, ImageUploadSerializer
 from .models import Clerk
     
     
@@ -24,8 +24,22 @@ class ClerkViewSet(viewsets.ModelViewSet):
             return ClerkSerializer
 
 
-# class ClerkPicUpload(generics.GenericAPIView):
-#     def post(self, request):
+class ProfilePicUpload(generics.GenericAPIView):
+    serializer_class = ImageUploadSerializer
+    def post(self, request, id):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        file = serializer.validated_data['image']
+        user = get_object_or_404(User, pk=id)
+
+        if hasattr(user, 'clerk'):
+            clerk = user.clerk
+            clerk.image = file
+            clerk.profile_pic.save(file.name, file, save=True)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "User not have a clerk"}, status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_201_CREATED)
 
 
 class IsAdmin(generics.GenericAPIView):
