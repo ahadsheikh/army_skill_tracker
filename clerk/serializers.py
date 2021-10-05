@@ -30,6 +30,14 @@ class ClerkCreateSerializer(serializers.ModelSerializer):
         return Clerk.objects.create(**validated_data)
 
 
+class ClerkRetrievekSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Clerk
+        fields = ('user', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact', 'profile_pic')
+    
+
 class ClerkSerializer(serializers.ModelSerializer):
     user = UserSerializer()
 

@@ -7,7 +7,7 @@ from rest_framework import status
 import jwt 
 from django.shortcuts import get_object_or_404
 
-from clerk.serializers import ClerkSerializer, ClerkCreateSerializer, ImageUploadSerializer
+from clerk.serializers import ClerkSerializer, ClerkCreateSerializer, ImageUploadSerializer, ClerkRetrievekSerializer
 from .models import Clerk
     
     
@@ -20,6 +20,8 @@ class ClerkViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'create':
             return ClerkCreateSerializer
+        elif self.action in ['retrieve', 'list']:
+            return ClerkRetrievekSerializer
         else:
             return ClerkSerializer
 
