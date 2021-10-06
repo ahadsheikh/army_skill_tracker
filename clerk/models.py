@@ -1,12 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-USER_TYPE_CHOICES = (
-    ('A', 'Admin'),
-    ('C', 'Clerk'),
-    ('S', 'Soldier'),
-)
-
 
 class Clerk(models.Model):
     """

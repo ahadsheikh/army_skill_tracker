@@ -24,8 +24,13 @@ class ClerkCreateSerializer(serializers.ModelSerializer):
         fields = ('user', 'personal_no', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact')
 
     def create(self, validated_data):
-        user = validated_data.pop('user', None)
-        user = User.objects.create(**user)
+        userData = validated_data.pop('user', None)
+        user = User.objects.create(
+            username=userData['username'],
+            email=userData['email'],
+        )
+        user.set_password(userData['password'])
+        user.save()
         validated_data['user'] = user
         return Clerk.objects.create(**validated_data)
 
@@ -50,12 +55,11 @@ class ClerkSerializer(serializers.ModelSerializer):
         userdata = validated_data.pop('user', None)
         user.username = userdata.get('username', user.username)
         user.email = userdata.get('username', user.email)
-        user.first_name = userdata.get('first_name', user.first_name)
-        user.last_name = userdata.get('first_name', user.last_name)
         user.save()
 
         instance.user = user
         instance.name = validated_data.get('name', instance.name)
+        instance.personal_no = validated_data.get('personal_no', instance.personal_no)
         instance.password = validated_data.get('password', instance.password)
         instance.rank = validated_data.get('rank', instance.rank)
         instance.address = validated_data.get('address', instance.address)
