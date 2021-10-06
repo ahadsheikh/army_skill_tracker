@@ -13,6 +13,7 @@ class Clerk(models.Model):
     Clerk model
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    personal_no = models.PositiveBigIntegerField(unique=True)
     name = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     rank = models.CharField(max_length=20)

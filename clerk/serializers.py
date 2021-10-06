@@ -7,13 +7,13 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'first_name', 'last_name')
+        fields = ('username', 'email', 'password')
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name')
+        fields = ('username', 'email')
 
 
 class ClerkCreateSerializer(serializers.ModelSerializer):
@@ -21,7 +21,7 @@ class ClerkCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Clerk
-        fields = ('user', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact')
+        fields = ('user', 'personal_no', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact')
 
     def create(self, validated_data):
         user = validated_data.pop('user', None)
@@ -35,7 +35,7 @@ class ClerkRetrievekSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Clerk
-        fields = ('user', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact', 'profile_pic')
+        fields = ('user', 'personal_no', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact', 'profile_pic')
     
 
 class ClerkSerializer(serializers.ModelSerializer):
@@ -43,7 +43,7 @@ class ClerkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Clerk
-        fields = ('user', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact')
+        fields = ('user', 'personal_no', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact')
     
     def update(self, instance, validated_data):
         user = instance.user
