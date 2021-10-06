@@ -25,6 +25,12 @@ class ClerkViewSet(viewsets.ModelViewSet):
         else:
             return ClerkSerializer
 
+    def destroy(self, request, pk, *args, **kwargs):
+        clerk = get_object_or_404(Clerk, id=pk)
+        user = clerk.user
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class ProfilePicUpload(generics.GenericAPIView):
     serializer_class = ImageUploadSerializer
