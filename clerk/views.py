@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import jwt 
 from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view, renderer_classes
 
 from clerk.serializers import ClerkSerializer, ClerkCreateSerializer, ImageUploadSerializer, ClerkRetrievekSerializer
 from .models import Clerk
@@ -30,6 +31,20 @@ class ClerkViewSet(viewsets.ModelViewSet):
         user = clerk.user
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(('GET',))
+def user_type(requst, id):
+    user = get_object_or_404(User, id=id)
+    if user.is_superuser:
+        return Response({'related_id': 0, 'type': 'admin'}, status=status.HTTP_200_OK)
+    elif hasattr(user, 'clerk'):
+        return Response({'related_id': user.clerk.id, 'type': 'clerk'}, status=status.HTTP_200_OK)
+    elif hasattr(user, 'officer'):
+        return Response({'related_id': 0, 'type': 'officer'}, status=status.HTTP_200_OK)
+    else:
+        return Response({'related_id': 0, 'type': 'unknown'}, status=status.HTTP_200_OK)
+
 
 
 class ProfilePicUpload(generics.GenericAPIView):
