@@ -1,3 +1,4 @@
+from django.http.request import validate_host
 from rest_framework import serializers
 from .models import Clerk
 from django.contrib.auth.models import User
@@ -44,8 +45,11 @@ class ClerkCreateSerializer(serializers.ModelSerializer):
         validated_data['user'] = user
 
         # Ending the clerk duty period
-        if Clerk.objects.count() > 0:
-            Clerk.objects.latest('starting_date').end_officer_duty()
+        subunit = validated_data.get('subunit', None)
+        if subunit:
+            cc = Clerk.objects.filter(subunit=subunit)
+            if cc.count() > 0:
+                cc.latest('starting_date').end_officer_duty()
 
         return Clerk.objects.create(**validated_data)
     
