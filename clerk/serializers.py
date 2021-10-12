@@ -15,6 +15,15 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'email')
 
+class UserUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+        extra_kwargs = {
+            'username': {'validators': []},
+        }
+
 
 class ClerkCreateSerializer(serializers.ModelSerializer):
     user = UserCreateSerializer()
@@ -38,30 +47,22 @@ class ClerkCreateSerializer(serializers.ModelSerializer):
         Clerk.objects.latest('starting_date').end_officer_duty()
 
         return Clerk.objects.create(**validated_data)
+    
 
-
-class ClerkRetrievekSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+class ClerkUpdateSerializer(serializers.ModelSerializer):
+    user = UserUpdateSerializer()
 
     class Meta:
         model = Clerk
-        fields = ('user', 'id', 'personal_no', 'name', 'password', 
-                        'rank', 'address', 'unit', 'subunit', 'starting_date', 
-                        'ending_date', 'contact', 'profile_pic')
-    
+        fields = ('user', 'personal_no', 'name', 'password', 'rank', 'address', 
+                        'unit', 'subunit', 'contact')
 
-class ClerkSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-
-    class Meta:
-        model = Clerk
-        fields = ('user', 'personal_no', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact')
-    
     def update(self, instance, validated_data):
+        print("adsf")
         user = instance.user
         userdata = validated_data.pop('user', None)
         user.username = userdata.get('username', user.username)
-        user.email = userdata.get('username', user.email)
+        user.email = userdata.get('email', user.email)
         user.save()
 
         instance.user = user
@@ -77,5 +78,15 @@ class ClerkSerializer(serializers.ModelSerializer):
         return instance
 
 
+class ClerkSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Clerk
+        fields = ('user', 'id', 'personal_no', 'name', 'password', 
+                        'rank', 'address', 'unit', 'subunit', 'starting_date', 
+                        'ending_date', 'contact', 'profile_pic')
+
+                        
 class ImageUploadSerializer(serializers.Serializer):
     image = serializers.ImageField()

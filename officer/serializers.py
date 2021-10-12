@@ -4,7 +4,7 @@ from clerk.models import Clerk
 from .models import Officer
 from django.contrib.auth.models import User
 
-from clerk.serializers import UserCreateSerializer, UserSerializer
+from clerk.serializers import UserCreateSerializer, UserSerializer, UserUpdateSerializer
 
 
 class OfficerCreateSerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class OfficerCreateSerializer(serializers.ModelSerializer):
         return Officer.objects.create(**validated_data)
 
 
-class OfficerRetrieveSerializer(serializers.ModelSerializer):
+class OfficerSerializer(serializers.ModelSerializer):
     user = UserSerializer()
 
     class Meta:
@@ -40,24 +40,25 @@ class OfficerRetrieveSerializer(serializers.ModelSerializer):
                     'unit', 'subunit', 'appointment', 'starting_date', 'ending_date', 'contact', 'profile_pic')
     
 
-class OfficerSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+class OfficerUpdateSerializer(serializers.ModelSerializer):
+    user = UserUpdateSerializer()
 
     class Meta:
         model = Officer
         fields = ('user', 'ba_no', 'name', 'password', 'rank', 'address', 
                     'unit', 'subunit', 'appointment', 'contact')
     
+
     def update(self, instance, validated_data):
         user = instance.user
         userdata = validated_data.pop('user', None)
         user.username = userdata.get('username', user.username)
-        user.email = userdata.get('username', user.email)
+        user.email = userdata.get('email', user.email)
         user.save()
 
         instance.user = user
         instance.name = validated_data.get('name', instance.name)
-        instance.ba_no = validated_data.get('ba_no', instance.personal_no)
+        instance.ba_no = validated_data.get('ba_no', instance.ba_no)
         instance.password = validated_data.get('password', instance.password)
         instance.rank = validated_data.get('rank', instance.rank)
         instance.address = validated_data.get('address', instance.address)

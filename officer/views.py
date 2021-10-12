@@ -7,7 +7,7 @@ from rest_framework import status
 import jwt 
 from django.shortcuts import get_object_or_404
 
-from officer.serializers import OfficerSerializer, OfficerCreateSerializer, OfficerRetrieveSerializer
+from officer.serializers import OfficerSerializer, OfficerCreateSerializer, OfficerUpdateSerializer
 from .models import Officer
     
     
@@ -31,8 +31,8 @@ class OfficerViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'create':
             return OfficerCreateSerializer
-        elif self.action in ['retrieve', 'list']:
-            return OfficerRetrieveSerializer
+        elif self.action in ['update', 'partial_update']:
+            return OfficerUpdateSerializer
         else:
             return OfficerSerializer
 
