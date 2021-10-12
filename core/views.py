@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
+from django.core.exceptions import ValidationError
 
 from clerk.serializers import ImageUploadSerializer
 from core.serializers import SoldierSerializer
@@ -68,7 +69,10 @@ class SolvierViewset(viewsets.ModelViewSet):
         q = self.parse_valid_query_params()
         if self.action == 'list':
             if bool(q):
-                queryset = Soldier.objects.filter(**q)
+                try:
+                    queryset = Soldier.objects.filter(**q)
+                except ValidationError as v:
+                    queryset = Soldier.objects.none()
                 return queryset
             else:
                 return Soldier.objects.all()         

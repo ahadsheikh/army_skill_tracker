@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import jwt 
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import ValidationError
 
 from officer.serializers import OfficerSerializer, OfficerCreateSerializer, OfficerUpdateSerializer
 from .models import Officer
@@ -21,7 +22,10 @@ class OfficerViewSet(viewsets.ModelViewSet):
         q = self.parse_valid_query_params()
         if self.action == 'list':
             if bool(q):
-                queryset = Officer.objects.filter(**q)
+                try:
+                    queryset = Officer.objects.filter(**q)
+                except ValidationError as v:
+                    queryset = Officer.objects.none()
                 return queryset
             else:
                 return Officer.objects.all()         

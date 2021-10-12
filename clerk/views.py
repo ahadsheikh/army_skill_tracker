@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import jwt 
 from django.shortcuts import get_object_or_404
-from rest_framework.decorators import api_view, renderer_classes
+from django.core.exceptions import ValidationError
 
 from clerk.serializers import ClerkSerializer, ClerkCreateSerializer, ClerkUpdateSerializer
 from .models import Clerk
@@ -23,7 +23,10 @@ class ClerkViewSet(viewsets.ModelViewSet):
         q = self.parse_valid_query_params()
         if self.action == 'list':
             if bool(q):
-                queryset = Clerk.objects.filter(**q)
+                try:
+                    queryset = Clerk.objects.filter(**q)
+                except ValidationError as v:
+                    queryset = Clerk.objects.none()
                 return queryset
             else:
                 return Clerk.objects.all()         
