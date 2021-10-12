@@ -22,7 +22,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from clerk.views import IsAdmin, ProfilePicUpload, user_type
+from core.views import IsAdmin, ProfilePicUpload, user_type
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,8 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('clerk-page/', include('clerk.urls')),
+    path('officer-page/', include('officer.urls')),
+    path('core/', include('core.urls')),
     path('profile-pic-upload/<int:id>/', ProfilePicUpload.as_view(), name='profile-pic-upload'),
     path('user/type/<int:id>/', user_type, name='user-type'),
     path('isadmin/<int:id>/', IsAdmin.as_view(), name='isadmin'),

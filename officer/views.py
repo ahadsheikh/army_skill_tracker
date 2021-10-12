@@ -1,4 +1,3 @@
-from django.db.models import query
 from django.shortcuts import render
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
@@ -7,55 +6,48 @@ from rest_framework.response import Response
 from rest_framework import status
 import jwt 
 from django.shortcuts import get_object_or_404
-from rest_framework.decorators import api_view, renderer_classes
 
-from clerk.serializers import ClerkSerializer, ClerkCreateSerializer, ImageUploadSerializer, ClerkRetrievekSerializer
-from .models import Clerk
+from officer.serializers import OfficerSerializer, OfficerCreateSerializer, OfficerRetrieveSerializer
+from .models import Officer
     
     
 
-class ClerkViewSet(viewsets.ModelViewSet):
+class OfficerViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
 
-    queryset = Clerk.objects.all()
+    queryset = Officer.objects.all()
 
     def get_queryset(self):
         q = self.parse_valid_query_params()
         if self.action == 'list':
             if bool(q):
-                queryset = Clerk.objects.filter(**q)
+                queryset = Officer.objects.filter(**q)
                 return queryset
             else:
-                return Clerk.objects.all()         
+                return Officer.objects.all()         
         else:
-            return Clerk.objects.all()
+            return Officer.objects.all()
 
     def get_serializer_class(self):
         if self.action == 'create':
-            return ClerkCreateSerializer
+            return OfficerCreateSerializer
         elif self.action in ['retrieve', 'list']:
-            return ClerkRetrievekSerializer
+            return OfficerRetrieveSerializer
         else:
-            return ClerkSerializer
+            return OfficerSerializer
 
     def destroy(self, request, pk, *args, **kwargs):
-        clerk = get_object_or_404(Clerk, id=pk)
-        user = clerk.user
+        officer = get_object_or_404(Officer, id=pk)
+        user = officer.user
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    # Usefull function
     def parse_valid_query_params(self):
         q = self.request.query_params
-        valid_query_params = ['personal_no', 'name', 'rank', 'unit', 'subunit', 'starting_date']
+        valid_query_params = ['ba_no', 'name', 'rank', 'unit', 'subunit', 'appointment', 'starting_date', 'ending_date']
         q_dict = {}
         for key in q.keys():
             if key in valid_query_params:
                 q_dict[key] = q[key]
 
         return q_dict
-                
-
-
-
-

@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'email')
+        fields = ('id', 'username', 'email')
 
 
 class ClerkCreateSerializer(serializers.ModelSerializer):
@@ -21,7 +21,8 @@ class ClerkCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Clerk
-        fields = ('user', 'personal_no', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact')
+        fields = ('user', 'personal_no', 'name', 'password', 'rank', 'address', 
+                            'unit', 'subunit', 'contact')
 
     def create(self, validated_data):
         userData = validated_data.pop('user', None)
@@ -32,6 +33,10 @@ class ClerkCreateSerializer(serializers.ModelSerializer):
         user.set_password(userData['password'])
         user.save()
         validated_data['user'] = user
+
+        # Ending the clerk duty period
+        Clerk.objects.latest('starting_date').end_officer_duty()
+
         return Clerk.objects.create(**validated_data)
 
 
@@ -40,7 +45,9 @@ class ClerkRetrievekSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Clerk
-        fields = ('user', 'personal_no', 'name', 'password', 'rank', 'address', 'unit', 'subunit', 'contact', 'profile_pic')
+        fields = ('user', 'id', 'personal_no', 'name', 'password', 
+                        'rank', 'address', 'unit', 'subunit', 'starting_date', 
+                        'ending_date', 'contact', 'profile_pic')
     
 
 class ClerkSerializer(serializers.ModelSerializer):

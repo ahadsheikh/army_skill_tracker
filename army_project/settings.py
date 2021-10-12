@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
     # Local apps
     'clerk.apps.ClerkConfig',
+    'officer.apps.OfficerConfig',
+    'core.apps.CoreConfig'
 ]
 
 MIDDLEWARE = [
@@ -159,3 +161,5 @@ CORS_ALLOW_CREDENTIALS = True
 # CORS_ALLOWED_ORIGIN_REGEXES = [
 #     'http://localhost:3030',
 # ]
+
+TIME_ZONE = 'Asia/Dacca'
