@@ -26,7 +26,9 @@ class OfficerCreateSerializer(serializers.ModelSerializer):
         validated_data['user'] = user
 
         # Set new officer as active and end the last officer
-        Officer.objects.latest('starting_date').end_officer_duty()
+        if Officer.objects.count() > 0:
+            Officer.objects.latest('starting_date').end_officer_duty()
+            
         
         return Officer.objects.create(**validated_data)
 

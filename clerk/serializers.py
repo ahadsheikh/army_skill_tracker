@@ -44,7 +44,8 @@ class ClerkCreateSerializer(serializers.ModelSerializer):
         validated_data['user'] = user
 
         # Ending the clerk duty period
-        Clerk.objects.latest('starting_date').end_officer_duty()
+        if Clerk.objects.count() > 0:
+            Clerk.objects.latest('starting_date').end_officer_duty()
 
         return Clerk.objects.create(**validated_data)
     
