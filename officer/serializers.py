@@ -30,7 +30,7 @@ class OfficerCreateSerializer(serializers.ModelSerializer):
         if subunit:
             cc = Officer.objects.filter(subunit=subunit)
             if cc.count() > 0:
-                cc.latest('starting_date').end_officer_duty()
+                cc.latest('id').end_officer_duty()
             
         
         return Officer.objects.create(**validated_data)

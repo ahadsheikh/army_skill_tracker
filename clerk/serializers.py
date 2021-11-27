@@ -49,7 +49,7 @@ class ClerkCreateSerializer(serializers.ModelSerializer):
         if subunit:
             cc = Clerk.objects.filter(subunit=subunit)
             if cc.count() > 0:
-                cc.latest('starting_date').end_officer_duty()
+                cc.latest('id').end_officer_duty()
 
         return Clerk.objects.create(**validated_data)
     
