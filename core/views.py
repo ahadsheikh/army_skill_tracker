@@ -1,5 +1,6 @@
+import json
 from django.shortcuts import render
-from rest_framework import generics, viewsets
+from rest_framework import generics, views, viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -9,8 +10,8 @@ from rest_framework.decorators import api_view
 from django.core.exceptions import ValidationError
 
 from clerk.serializers import ImageUploadSerializer
-from core.serializers import SoldierSerializer
-from core.models import Soldier
+from core.serializers import CriteriaChangeViewSerializer, ObservationSerializer, SoldierSerializer, CriteriaSerializer, SubCriteriaSerializer
+from core.models import Criteria, Observation, Soldier, SubCriteria
 
     
 
@@ -90,3 +91,106 @@ class SolvierViewset(viewsets.ModelViewSet):
                 q_dict[key] = q[key]
 
         return q_dict
+
+
+class ObservationsViewset(viewsets.ModelViewSet):
+    queryset = Observation.objects.all()
+    serializer_class = ObservationSerializer
+
+
+class CriteriaViewset(viewsets.ModelViewSet):
+    queryset = Criteria.objects.all()
+    serializer_class = CriteriaSerializer
+
+
+class SubCriteriaViewset(viewsets.ModelViewSet):
+    queryset = SubCriteria.objects.all()
+    serializer_class = SubCriteriaSerializer
+
+
+class MakeCriteria(views.APIView):
+    def get(self, request):
+        with open('criterias.json', 'r') as f:
+            criterias = json.load(f)
+            for c in criterias:
+                n = Criteria.objects.filter(name=c['name']).count()
+                if n == 0:
+                    Criteria.objects.create(name=c['name'])
+        
+        return Response(status=status.HTTP_200_OK)
+
+
+class CriteriaChangeView(views.APIView):
+    def get(self, request, id):
+        criteria = get_object_or_404(Criteria, pk=id)
+        c_data = CriteriaSerializer(criteria).data
+        c_data['id'] = criteria.id
+        c_data['sub_criterias'] = []
+
+        sub_cries = SubCriteria.objects.filter(criteria_id=id)
+        for sub_cri in sub_cries:
+            s_data = SubCriteriaSerializer(sub_cri).data
+            del s_data['criteria']
+            s_data['id'] = sub_cri.id
+            c_data['sub_criterias'].append(s_data)
+
+        return Response(c_data, status=status.HTTP_200_OK)
+
+
+    def post(self, request, id):
+        cri_change_seri = CriteriaChangeViewSerializer(data=request.data)
+        cri_change_seri.is_valid(raise_exception=True)
+
+        criteria = get_object_or_404(Criteria, pk=id)
+        criteria.mark = cri_change_seri.validated_data['mark']
+        criteria.save()
+
+        for sub_cri in cri_change_seri.validated_data['sub_criterias']:
+            sub_criteria = get_object_or_404(SubCriteria, pk=sub_cri['id'])
+            sub_criteria.mark = sub_cri['mark']
+            sub_criteria.save()
+
+        res = {
+            'message': 'Criteria updated successfully'
+        }
+
+        return Response(res, status=status.HTTP_200_OK)
+
+
+class AssessmentView(views.APIView):
+    def get(self, request, s_id, c_id):
+        soldier = get_object_or_404(Soldier, pk=s_id)
+        criteria = get_object_or_404(Criteria, pk=id)
+        c_data = CriteriaSerializer(criteria).data
+        c_data['id'] = criteria.id
+        c_data['sub_criterias'] = []
+
+        sub_cries = SubCriteria.objects.filter(criteria_id=id)
+        for sub_cri in sub_cries:
+            s_data = SubCriteriaSerializer(sub_cri).data
+            del s_data['criteria']
+            s_data['id'] = sub_cri.id
+            c_data['sub_criterias'].append(s_data)
+
+        return Response(c_data, status=status.HTTP_200_OK)
+
+
+    def post(self, request, id):
+        cri_change_seri = CriteriaChangeViewSerializer(data=request.data)
+        cri_change_seri.is_valid(raise_exception=True)
+
+        criteria = get_object_or_404(Criteria, pk=id)
+        criteria.mark = cri_change_seri.validated_data['mark']
+        criteria.save()
+
+        for sub_cri in cri_change_seri.validated_data['sub_criterias']:
+            sub_criteria = get_object_or_404(SubCriteria, pk=sub_cri['id'])
+            sub_criteria.mark = sub_cri['mark']
+            sub_criteria.save()
+
+        res = {
+            'status': True,
+            'message': 'Criteria updated successfully'
+        }
+
+        return Response(res, status=status.HTTP_200_OK)

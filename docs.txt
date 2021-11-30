@@ -1,0 +1,523 @@
+Token Get:
+	URL: https://ahadsheikh.pythonanywhere.com/api/token/
+	Method: POST
+	Body: {
+		"username": Username,
+		"password": Password
+	}
+	Response: {
+		"access": access token,
+		"refresh": refresh token
+	}
+
+
+Clerk Create:
+	URL: https://ahadsheikh.pythonanywhere.com/clerk-page/clerks/
+	Body: {
+		"user": {
+			"username": "army11",
+			"email": "army1@calks.com",
+			"password": "test1234"
+		},
+		"personal_no": "123411",
+		"name": "Army1",
+		"password": "test1234",
+		"rank": "Rank0",
+		"address": "Dhaka",
+		"unit": "Unit0",
+		"subunit": "SubUnit0",
+		"contact": "Contact0"
+	}
+	Method: POST
+	Response: {
+		"user": {
+			"username": "army11",
+			"email": "army1@calks.com",
+			"password": "Encrypted PASS"
+		},
+		"personal_no": "123411",
+		"name": "Army1",
+		"password": "test1234",
+		"rank": "Rank0",
+		"address": "Dhaka",
+		"unit": "Unit0",
+		"subunit": "SubUnit0",
+		"contact": "Contact0"
+	}
+	
+Clerk List:
+	URL: https://ahadsheikh.pythonanywhere.com/clerk-page/clerks/
+	Method: Get
+	Response: [
+		{
+		    "user": {
+		        "id": 2,
+		        "username": "ahadNewNew",
+		        "email": "aaa@b.com"
+		    },
+		    "id": 1,
+		    "personal_no": 1234,
+		    "name": "Ahad Sheikh",
+		    "password": "test1234",
+		    "rank": "1",
+		    "address": "Rajshahi, Bangladesh",
+		    "unit": "2",
+		    "subunit": "3",
+		    "starting_date": "2021-10-06",
+		    "ending_date": null,
+		    "contact": "+8801753108681",
+		    "profile_pic": "http://127.0.0.1:8000/media/profile_pics/bob.jpg"
+		},
+		{
+		    "user": {
+		        "id": 4,
+		        "username": "bob3",
+		        "email": "bob3@calks.com"
+		    },
+		    "id": 3,
+		    "personal_no": 3,
+		    "name": "Bob Lan",
+		    "password": "test1234",
+		    "rank": "1",
+		    "address": "Rajshahi, Bangladesh",
+		    "unit": "2",
+		    "subunit": "3",
+		    "starting_date": "2021-10-06",
+		    "ending_date": null,
+		    "contact": "+8801753108681",
+		    "profile_pic": "http://127.0.0.1:8000/media/army.jpg"
+		}
+	]
+	
+Clerk Get:
+	URL: https://ahadsheikh.pythonanywhere.com/clerk-page/clerks/<clerk_id>/
+	Method: Get
+	Response: {
+		"user": {
+		    "id": 2,
+		    "username": "ahadNewNew",
+		    "email": "aaa@b.com"
+		},
+		"id": 1,
+		"personal_no": 1234,
+		"name": "Ahad Sheikh",
+		"password": "test1234",
+		"rank": "1",
+		"address": "Rajshahi, Bangladesh",
+		"unit": "2",
+		"subunit": "3",
+		"starting_date": "2021-10-06",
+		"ending_date": null,
+		"contact": "+8801753108681",
+		"profile_pic": "http://127.0.0.1:8000/media/profile_pics/bob.jpg"
+	}
+		
+Clerk Update:
+	URL: https://ahadsheikh.pythonanywhere.com/clerk-page/clerks/<clerk_id>/
+	Method: PUT/PATCH | PATCH support partial data
+	Body: {
+		"user": {
+		    "username": "ahadNewNew",
+		    "email": "aaa@b.com"
+		},
+		"personal_no": 1234,
+		"name": "Ahad Sheikh",
+		"password": "test1234",
+		"rank": "1",
+		"address": "Rajshahi, Bangladesh",
+		"unit": "2",
+		"subunit": "3",
+		"contact": "+8801753108681"
+	}
+
+	Response: {
+		"user": {
+		    "username": "ahadNewNewNew",
+		    "email": "aaa@b.com"
+		},
+		"personal_no": 1234,
+		"name": "Ahad Sheikh",
+		"password": "test1234",
+		"rank": "1",
+		"address": "Rajshahi, Bangladesh",
+		"unit": "2",
+		"subunit": "3",
+		"contact": "+8801753108681"
+	}
+	
+Clerk Delete:
+	URL: https://ahadsheikh.pythonanywhere.com/clerk-page/clerks/<clerk_id>/
+	Method: Delete
+	
+
+Officer Create:
+	URL: https://ahadsheikh.pythonanywhere.com/officer-page/officers/
+	Method: POST
+	Body: {
+		"user": {
+		    "username": "",
+		    "email": "",
+		    "password": ""
+		},
+		"ba_no": null,
+		"name": "",
+		"password": "",
+		"rank": "",
+		"address": "",
+		"unit": "",
+		"subunit": "",
+		"appointment": "",
+		"contact": ""
+	}
+	Response: {
+		"user": {
+		    "username": "officer3",
+		    "email": "officer3@calcs.com",
+		    "password": Encrypted Pass
+		},
+		"ba_no": 3,
+		"name": "Officer3",
+		"password": "test1234",
+		"rank": "1",
+		"address": "Dhaka",
+		"unit": "1",
+		"subunit": "1",
+		"appointment": "1",
+		"starting_date": "2021-10-12",
+		"contact": "1"
+	}
+	
+Officer List:
+	URL: https://ahadsheikh.pythonanywhere.com/officer-page/officers/
+	Method: Get
+	Response: [
+		{
+		    "user": {
+		        "id": 16,
+		        "username": "officer1",
+		        "email": "officer1@calcs.com"
+		    },
+		    "id": 1,
+		    "ba_no": 1,
+		    "name": "Officer1",
+		    "password": "test1234",
+		    "rank": "1",
+		    "address": "Dhaka",
+		    "unit": "1",
+		    "subunit": "1",
+		    "appointment": "1",
+		    "starting_date": "2021-10-11",
+		    "ending_date": "2021-10-12",
+		    "contact": "1",
+		    "profile_pic": "http://127.0.0.1:8000/media/army.jpg"
+		},
+		{
+		    "user": {
+		        "id": 17,
+		        "username": "officer2",
+		        "email": "officer2@calcs.com"
+		    },
+		    "id": 2,
+		    "ba_no": 2,
+		    "name": "Officer2",
+		    "password": "test1234",
+		    "rank": "1",
+		    "address": "Dhaka",
+		    "unit": "q",
+		    "subunit": "3",
+		    "appointment": "1",
+		    "starting_date": "2021-10-11",
+		    "ending_date": null,
+		    "contact": "123124",
+		    "profile_pic": "http://127.0.0.1:8000/media/army.jpg"
+		}
+	]
+	
+Officer Get:
+	URL: https://ahadsheikh.pythonanywhere.com/officer-page/officer/<officer_id>/
+	Method: Get
+	Response: {
+		"user": {
+		    "id": 16,
+		    "username": "officer1",
+		    "email": "officer1@calcs.com"
+		},
+		"id": 1,
+		"ba_no": 1,
+		"name": "Officer1",
+		"password": "test1234",
+		"rank": "1",
+		"address": "Dhaka",
+		"unit": "1",
+		"subunit": "1",
+		"appointment": "1",
+		"starting_date": "2021-10-11",
+		"ending_date": "2021-10-12",
+		"contact": "1",
+		"profile_pic": "http://127.0.0.1:8000/media/army.jpg"
+	}
+	
+Officer Update:
+	URL: https://ahadsheikh.pythonanywhere.com/officer-page/officers/<officer_id>/
+	Method: PUT/PATCH | PATCH support partial data
+	Body: {
+		"user": {
+		    "username": "officer1",
+		    "email": "officer1@calcs.com"
+		},
+		"ba_no": 1,
+		"name": "Officer1",
+		"password": "test1234",
+		"rank": "1",
+		"address": "Dhaka",
+		"unit": "1",
+		"subunit": "1",
+		"appointment": "1",
+		"contact": "1"
+	}
+	Response: {
+		"user": {
+		    "username": "army111",
+		    "email": "army111"
+		},
+		"personal_no": 123411,
+		"name": "Army1",
+		"password": "test1234",
+		"rank": "Rank0",
+		"address": "Dhaka",
+		"unit": "Unit0",
+		"subunit": "SubUnit0",
+		"contact": "Contact0"
+	}
+	
+Officer Delete:
+	URL: https://ahadsheikh.pythonanywhere.com/officer-page/officer/<officer_id>/
+	Method: Delete
+
+
+Soldier Create:
+	URL: https://ahadsheikh.pythonanywhere.com/core/soldiers/
+	Method: POST
+	Body: {
+		"personal_no": null,
+		"name": "",
+		"rank": "",
+		"address": "",
+		"unit": "",
+		"subunit": "",
+		"appointment": "",
+		"join_date": null,
+		"commision_date": null,
+		"contact": "",
+		"previous_company": "",
+		"mission": ""
+	}
+	Response: {
+		"personal_no": null,
+		"name": "",
+		"rank": "",
+		"address": "",
+		"unit": "",
+		"subunit": "",
+		"appointment": "",
+		"join_date": null,
+		"commision_date": null,
+		"contact": "",
+		"previous_company": "",
+		"mission": ""
+	}
+	
+Soldier List:
+	URL: https://ahadsheikh.pythonanywhere.com/core/soldiers/
+	Method: Get
+	Response: [
+		{
+			"personal_no": null,
+			"name": "",
+			"rank": "",
+			"address": "",
+			"unit": "",
+			"subunit": "",
+			"appointment": "",
+			"join_date": null,
+			"commision_date": null,
+			"contact": "",
+			"previous_company": "",
+			"mission": ""
+		}
+	]
+	
+Soldier Get:
+	URL: https://ahadsheikh.pythonanywhere.com/core/soldiers/<soldier_id>/
+	Method: Get
+	Response: {
+		"personal_no": null,
+		"name": "",
+		"rank": "",
+		"address": "",
+		"unit": "",
+		"subunit": "",
+		"appointment": "",
+		"join_date": null,
+		"commision_date": null,
+		"contact": "",
+		"previous_company": "",
+		"mission": ""
+	}
+	
+Officer Update:
+	URL: https://ahadsheikh.pythonanywhere.com/core/soldiers/<soldier_id>/
+	Method: PUT/PATCH | PATCH support partial data
+	Body: {
+		"personal_no": null,
+		"name": "",
+		"rank": "",
+		"address": "",
+		"unit": "",
+		"subunit": "",
+		"appointment": "",
+		"join_date": null,
+		"commision_date": null,
+		"contact": "",
+		"previous_company": "",
+		"mission": ""
+	}
+	Response: {
+		"personal_no": null,
+		"name": "",
+		"rank": "",
+		"address": "",
+		"unit": "",
+		"subunit": "",
+		"appointment": "",
+		"join_date": null,
+		"commision_date": null,
+		"contact": "",
+		"previous_company": "",
+		"mission": ""
+	}
+	
+Officer Delete:
+	URL: https://ahadsheikh.pythonanywhere.com/core/soldiers/<soldier_id>
+	Method: Delete
+		
+
+	
+PictureUpload:
+	URl: https://ahadsheikh.pythonanywhere.com/profile-pic-upload/<user_id>/
+	Method: Post
+	Body: {
+		"image": image file
+	}
+	
+IsAdmin:
+	URL: https://ahadsheikh.pythonanywhere.com/isadmin/<clerk_id>/
+	Method: GET
+	Response: {
+		"isadmin": true
+	}
+	
+User Type:
+	URL: https://ahadsheikh.pythonanywhere.com/user/type/<user_id>/
+	Method: Delete
+	Response: {
+		"related_id": 4,
+		"type": "clerk"
+	}
+
+/// It will create all criterias. Should be called only once.
+Make Criterias
+    URL: https://ahadsheikh.pythonanywhere.com/core/make-criterias/
+	Method: GET
+
+Get All Criteria
+    URL: https://ahadsheikh.pythonanywhere.com/core/criterias/
+	Method: GET
+	Response: [
+        {
+            "id": 2,
+            "name": "demo",
+            "mark": 15
+        },
+        {
+            "id": 3,
+            "name": "A",
+            "mark": 0
+        },
+        {
+            "id": 4,
+            "name": "B",
+            "mark": 0
+        },
+        {
+            "id": 5,
+            "name": "C",
+            "mark": 0
+        }
+    ]
+
+
+Criteria and SubCriteria GET
+    URL: https://ahadsheikh.pythonanywhere.com/core/change-criteria/<criteria_id>/
+	Method: GET
+	Response: {
+        "id": 2,
+        "name": "criteria_name",
+        "mark": 0
+        "sub_criterias": [
+            {
+                "id": 1,
+                "name": "demo_1",
+                "mark": 0
+            },
+            {
+                "id": 2,
+                "name": "demo_2",
+                "mark": 0
+            }
+        ]
+    }
+
+Add a Sub Criteria
+    URL: https://ahadsheikh.pythonanywhere.com/core/subcriterias/
+    Method: POST
+    Body: {
+        "criteria": 2,
+        "name": "demo_1",
+        "mark": 10 // Optional
+    }
+    Response: {
+        "id": 1,
+        "criteria": 2,
+        "name": "demo_1",
+        "mark": 10
+    }
+
+
+Get a Sub Criteria
+    URL: https://ahadsheikh.pythonanywhere.com/core/subcriterias/<sub_criteria_id>
+    Method: GET
+    Response: {
+        "id": 1,
+        "criteria": 2,
+        "name": "demo_1",
+        "mark": 10
+    }
+
+Delete a Sub Criteria
+    URL: https://ahadsheikh.pythonanywhere.com/core/subcriterias/<sub_criteria_id>
+    Method: DELETE
+
+Criteria and SubCriteria Changing
+    URL: https://ahadsheikh.pythonanywhere.com/core/change-criteria/<criteria_id>/
+	Method: POST
+    Body: {
+        "mark": 15,
+        "sub_criterias": [
+            { "id": 1, "mark": 10},
+            { "id": 2, "mark": 5}
+        ]
+    }
+	Response: {
+        "message": "Criteria updated successfully"
+    }

@@ -1,4 +1,29 @@
+from re import S
 from django.db import models
+
+
+class Criteria(models.Model):
+    name = models.CharField(max_length=100)
+    mark = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+
+class SubCriteria(models.Model):
+    criteria = models.ForeignKey(Criteria, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    mark = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+
+class Observation(models.Model):
+    message = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.message
 
 
 class Soldier(models.Model):
@@ -19,3 +44,10 @@ class Soldier(models.Model):
         return self.name
 
 
+class SoldierMark(models.Model):
+    soldier = models.ForeignKey(Soldier, on_delete=models.CASCADE)
+    sub_criteria = models.ForeignKey(SubCriteria, on_delete=models.CASCADE)
+    mark = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.sub_criteria.name + ": " + str(self.mark)
