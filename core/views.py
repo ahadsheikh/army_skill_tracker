@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 
 from clerk.serializers import ImageUploadSerializer
 from core.serializers import CriteriaChangeViewSerializer, ObservationSerializer, SoldierSerializer, CriteriaSerializer, SubCriteriaSerializer
-from core.models import Criteria, Observation, Soldier, SubCriteria
+from core.models import Criteria, Observation, Soldier, SoldierMark, SubCriteria
 
     
 
@@ -162,37 +162,47 @@ class CriteriaChangeView(views.APIView):
 class AssessmentView(views.APIView):
     def get(self, request, s_id, c_id):
         soldier = get_object_or_404(Soldier, pk=s_id)
-        criteria = get_object_or_404(Criteria, pk=id)
+        criteria = get_object_or_404(Criteria, pk=c_id)
         c_data = CriteriaSerializer(criteria).data
         c_data['id'] = criteria.id
         c_data['sub_criterias'] = []
 
-        sub_cries = SubCriteria.objects.filter(criteria_id=id)
+        sum = 0
+
+        sub_cries = SubCriteria.objects.filter(criteria=criteria)
         for sub_cri in sub_cries:
             s_data = SubCriteriaSerializer(sub_cri).data
             del s_data['criteria']
             s_data['id'] = sub_cri.id
+
+            s_mark = SoldierMark.objects.filter(soldier=soldier, sub_criteria=sub_cri).first()
+            if s_mark:
+                s_data['mark'] = s_mark.mark
+                sum += s_mark.mark
+            else:
+                s_data['mark'] = 0
             c_data['sub_criterias'].append(s_data)
+        c_data['mark'] = sum
 
         return Response(c_data, status=status.HTTP_200_OK)
 
 
-    def post(self, request, id):
+    def post(self, request, s_id, c_id):    
         cri_change_seri = CriteriaChangeViewSerializer(data=request.data)
         cri_change_seri.is_valid(raise_exception=True)
-
-        criteria = get_object_or_404(Criteria, pk=id)
-        criteria.mark = cri_change_seri.validated_data['mark']
-        criteria.save()
+        
+        soldier = get_object_or_404(Soldier, pk=s_id)
 
         for sub_cri in cri_change_seri.validated_data['sub_criterias']:
             sub_criteria = get_object_or_404(SubCriteria, pk=sub_cri['id'])
-            sub_criteria.mark = sub_cri['mark']
-            sub_criteria.save()
+            sm = SoldierMark.objects.filter(soldier=soldier, sub_criteria=sub_criteria)
+            if sm.count() == 0:
+                SoldierMark.objects.create(soldier=soldier, sub_criteria=sub_criteria, mark=sub_cri['mark'])
+            else:
+                sm.update(mark=sub_cri['mark'])
 
         res = {
-            'status': True,
-            'message': 'Criteria updated successfully'
+            'message': 'Mark Saved successfully'
         }
 
         return Response(res, status=status.HTTP_200_OK)

@@ -6,7 +6,8 @@ from .views import (
     SubCriteriaViewset, 
     ObservationsViewset,
     CriteriaChangeView,
-    MakeCriteria
+    MakeCriteria,
+    AssessmentView
 )
 
 router = routers.DefaultRouter()
@@ -19,6 +20,7 @@ router.register(r'observations', ObservationsViewset)
 urlpatterns = [
     path('change-criteria/<int:id>/', CriteriaChangeView.as_view(), name='criteria_change'),
     path('make-criterias/', MakeCriteria.as_view(), name='make_criteria'),
+    path('assessment/soldier/<int:s_id>/criteria/<int:c_id>/', AssessmentView.as_view(), name='assessment'),
 ]
 
 urlpatterns += router.urls

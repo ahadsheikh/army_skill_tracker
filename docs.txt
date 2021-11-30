@@ -457,27 +457,6 @@ Get All Criteria
     ]
 
 
-Criteria and SubCriteria GET
-    URL: https://ahadsheikh.pythonanywhere.com/core/change-criteria/<criteria_id>/
-	Method: GET
-	Response: {
-        "id": 2,
-        "name": "criteria_name",
-        "mark": 0
-        "sub_criterias": [
-            {
-                "id": 1,
-                "name": "demo_1",
-                "mark": 0
-            },
-            {
-                "id": 2,
-                "name": "demo_2",
-                "mark": 0
-            }
-        ]
-    }
-
 Add a Sub Criteria
     URL: https://ahadsheikh.pythonanywhere.com/core/subcriterias/
     Method: POST
@@ -507,6 +486,27 @@ Get a Sub Criteria
 Delete a Sub Criteria
     URL: https://ahadsheikh.pythonanywhere.com/core/subcriterias/<sub_criteria_id>
     Method: DELETE
+	
+Criteria and SubCriteria GET
+    URL: https://ahadsheikh.pythonanywhere.com/core/change-criteria/<criteria_id>/
+	Method: GET
+	Response: {
+        "id": 2,
+        "name": "criteria_name",
+        "mark": 0
+        "sub_criterias": [
+            {
+                "id": 1,
+                "name": "demo_1",
+                "mark": 0
+            },
+            {
+                "id": 2,
+                "name": "demo_2",
+                "mark": 0
+            }
+        ]
+    }
 
 Criteria and SubCriteria Changing
     URL: https://ahadsheikh.pythonanywhere.com/core/change-criteria/<criteria_id>/
@@ -521,3 +521,39 @@ Criteria and SubCriteria Changing
 	Response: {
         "message": "Criteria updated successfully"
     }
+
+
+Assessment Get
+ 	URL: https://ahadsheikh.pythonanywhere.com/core/assessment/soldier/<soldier_id>/criteria/<criteria_id>
+	Method: GET
+	Response: {
+		"id": 22,
+		"name": "Organisational capabilities",
+		"mark": 9,
+		"sub_criterias": [
+			{
+				"id": 13,
+				"name": "K",
+				"mark": 4
+			},
+			{
+				"id": 14,
+				"name": "L",
+				"mark": 5
+			}
+		]
+	}
+
+Criteria and SubCriteria Changing
+    URL: https://ahadsheikh.pythonanywhere.com/core/assessment/soldier/<soldier_id>/criteria/<criteria_id>
+	Method: POST
+    Body: {
+		"mark": 8,
+		"sub_criterias": [
+			{ "id": 13, "mark": 4},
+			{ "id": 14, "mark": 5}
+		]
+	}
+	Response: {
+		"message": "Mark Saved successfully"
+	}
