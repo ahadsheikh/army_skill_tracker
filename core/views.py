@@ -1,4 +1,5 @@
 import json
+from django.conf import settings
 from django.shortcuts import render
 from rest_framework import generics, views, viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -110,7 +111,8 @@ class SubCriteriaViewset(viewsets.ModelViewSet):
 
 class MakeCriteria(views.APIView):
     def get(self, request):
-        with open('criterias.json', 'r') as f:
+        base_dir = settings.BASE_DIR
+        with open(f'{base_dir}/criterias.json', 'r') as f:
             criterias = json.load(f)
             for c in criterias:
                 n = Criteria.objects.filter(name=c['name']).count()
