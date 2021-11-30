@@ -544,7 +544,7 @@ Assessment Get
 		]
 	}
 
-Criteria and SubCriteria Changing
+Assessment Set Mark
     URL: https://ahadsheikh.pythonanywhere.com/core/assessment/soldier/<soldier_id>/criteria/<criteria_id>
 	Method: POST
     Body: {
@@ -557,3 +557,72 @@ Criteria and SubCriteria Changing
 	Response: {
 		"message": "Mark Saved successfully"
 	}
+
+
+Observations All:
+	URL: https://ahadsheikh.pythonanywhere.com/core/observations
+	Method: GET
+	Response: [
+		{
+			"id": 1,
+			"message": "He is Good"
+		},
+		{
+			"id": 2,
+			"message": "He is Smart"
+		}
+	]
+
+Observations Create:
+	URL: https://ahadsheikh.pythonanywhere.com/core/observations/
+	Method: POST
+	Body: {
+		"message": "He is "
+	}
+	Response:{
+		"id": 2,
+		"message": "He is Good"
+	}
+
+Observations Get:
+	URL: https://ahadsheikh.pythonanywhere.com/core/observations/<observations_id>
+	Method: GET
+	Response:{
+		"id": 2,
+		"message": "He is Good"
+	}
+
+Observations Edit:
+	URL: https://ahadsheikh.pythonanywhere.com/core/observations/<observations_id>
+	Method: PUT
+	Body: {
+		"message": "He is Good"
+	}
+	Response:{
+		"id": 2,
+		"message": "He is Good"
+	}
+
+Observations Edit:
+	URL: https://ahadsheikh.pythonanywhere.com/core/observations/<observations_id>
+	Method: DELETE
+
+Add Observations to a Soldier:
+	URL: https://ahadsheikh.pythonanywhere.com/core/observations/soldier/<soldier_id>
+	Method: POST
+	Body: [
+		{"id": 1},
+		{"id": 2}
+	]
+	Response: {
+		"message": "Added Successfully"
+	}
+
+Soldier Observations Get:
+	URL: https://ahadsheikh.pythonanywhere.com/core/observations/soldier/<soldier_id>
+	Method: GET
+	Response: [
+		{ "id": 1, "message": "He is Good" },
+		{ "id": 2, "message": "He is Smart" },
+		{ "id": 3, "message": "He is Fine" },
+	]

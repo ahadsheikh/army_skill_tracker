@@ -40,5 +40,9 @@ class CriteriaChangeViewSerializer(serializers.Serializer):
     sub_criterias = SubCri(many=True)
 
 
+class SoldierObservationSeralizer(serializers.Serializer):
+    id = serializers.IntegerField()
+
+
 
     

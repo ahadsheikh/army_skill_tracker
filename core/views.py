@@ -11,7 +11,7 @@ from rest_framework.decorators import api_view
 from django.core.exceptions import ValidationError
 
 from clerk.serializers import ImageUploadSerializer
-from core.serializers import CriteriaChangeViewSerializer, ObservationSerializer, SoldierSerializer, CriteriaSerializer, SubCriteriaSerializer
+from core.serializers import CriteriaChangeViewSerializer, ObservationSerializer, SoldierObservationSeralizer, SoldierSerializer, CriteriaSerializer, SubCriteriaSerializer
 from core.models import Criteria, Observation, Soldier, SoldierMark, SubCriteria
 
     
@@ -206,3 +206,37 @@ class AssessmentView(views.APIView):
         }
 
         return Response(res, status=status.HTTP_200_OK)
+
+
+class SoldierObservationView(views.APIView):
+    def get(self, request, id):
+        soldier = get_object_or_404(Soldier, pk=id)
+        observations = soldier.observations.all()
+        data = []
+        for observation in observations:
+            o_data = ObservationSerializer(observation).data
+            data.append(o_data)
+        
+        return Response(data, status=status.HTTP_200_OK)
+
+    def post(self, request, id):
+        observation_seri = SoldierObservationSeralizer(data=request.data, many=True)
+        observation_seri.is_valid(raise_exception=True)
+
+        soldier = get_object_or_404(Soldier, pk=id)
+
+        data = {
+            "message": "Added Successfully",
+            "failed": []
+        }
+        soldier.observations.clear()
+        for observation in observation_seri.validated_data:
+            try:
+                ob = Observation.objects.get(id=observation['id'])
+                soldier.observations.add(ob)
+
+            except Observation.DoesNotExist:
+                data['failed'].append(observation)
+            
+
+        return Response(data, status=status.HTTP_200_OK)

@@ -39,6 +39,7 @@ class Soldier(models.Model):
     contact = models.CharField(max_length=50)
     previous_company = models.CharField(max_length=20)
     mission = models.CharField(max_length=45)
+    observations = models.ManyToManyField(Observation)
 
     def __str__(self):
         return self.name
