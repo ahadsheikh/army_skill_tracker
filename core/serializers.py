@@ -6,7 +6,7 @@ class SoldierSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Soldier
-        fields = ('personal_no', 'name', 'rank', 'address', 'unit', 
+        fields = ('id', 'personal_no', 'name', 'rank', 'address', 'unit', 
                         'subunit', 'appointment', 'join_date', 'commision_date',
                         'contact', 'previous_company', 'mission')
 

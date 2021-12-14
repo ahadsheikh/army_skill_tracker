@@ -328,10 +328,11 @@ Soldier Create:
 	}
 	
 Soldier List:
-	URL: https://ahadsheikh.pythonanywhere.com/core/soldiers/
+	URL: https://ahadsheikh.pythonanywhere.com/	
 	Method: Get
 	Response: [
 		{
+			"id": 1,
 			"personal_no": null,
 			"name": "",
 			"rank": "",
@@ -351,6 +352,7 @@ Soldier Get:
 	URL: https://ahadsheikh.pythonanywhere.com/core/soldiers/<soldier_id>/
 	Method: Get
 	Response: {
+		"id": 1,
 		"personal_no": null,
 		"name": "",
 		"rank": "",
