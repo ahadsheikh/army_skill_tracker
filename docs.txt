@@ -628,3 +628,109 @@ Soldier Observations Get:
 		{ "id": 2, "message": "He is Smart" },
 		{ "id": 3, "message": "He is Fine" },
 	]
+
+
+Report Page Default Data:
+	URL: URL: https://ahadsheikh.pythonanywhere.com/core/report/soldier/<soldier_id>/
+	Method: GET
+	Response: {
+		'evaluation_date_from': '',
+		'evaluation_date_to': '',
+		'personal_no': soldier.personal_no,
+		'rank': soldier.rank,
+		'name': soldier.name,
+		'appointment': soldier.appointment,
+		'date_of_enrollment': soldier.date_of_enrollment,
+		'last_promotion_date': soldier.last_promotion_date,
+		'unit': soldier.unit,
+		'medical_category': '',
+
+		'IPFT_first_biannual': '',
+		'IPFT_second_biannual': '',
+		'RET': '',
+		'DIV_order_letter_no_1': '',
+		'DIV_order_letter_no_2': '',
+		'DIV_order_letter_no_3': '',
+
+		# Marks of different criteria 
+		'criteria': {
+			'honesty': 2,
+			'professional_efficiency': 8,
+			'command_and_control': 4,
+			'intelligence': 6,
+			'dutifulness': 1,
+			'professional_nitiative': 10,
+			'obedience': 8,
+			'discipline': 5,
+			'mentality_towards_senior': 9,
+			'organizational_capabilities': 2,
+			'total_marks': 55,
+		},
+
+		'fit_for_next_promotion': '',
+		'fit_for_next_promotion_yes_text': '',
+		'fit_for_next_promotion_no_text': '',
+		
+		'fit_for_being_instructor': '',
+		'fit_for_being_instructor_yes_text': '',
+		'fit_for_being_instructor_no_text': '',
+
+		'fit_for_foreign_mission': '',
+		'fit_for_foreign_mission_yes_text': '',
+		'fit_for_foreign_mission_no_text': '',
+
+		'recommendation_for_next_appt': '',
+		'special_quality': '',
+		'remarks_by_initiating_officer': '',
+
+		'grade': '',
+
+		'officer_ba': officer.ba_no,
+		'officer_rank': officer.rank,
+		'officer_name': officer.name,
+		'officer_appt': officer.appointment,
+		'officer_unit': officer.unit,
+	}
+
+Submit Report:
+	URL: https://ahadsheikh.pythonanywhere.com/core/report/soldier/<soldier_id>/
+	Method: POST
+	Body: {
+		*'evaluation_date_from': '',
+		*'evaluation_date_to': '',
+		*'medical_category': '',
+
+		*'IPFT_first_biannual': '', 	Boolean(0 or 1)
+		*'IPFT_second_biannual': '', 	Boolean(0 or 1)
+		*'RET': '', 					Boolean(0 or 1)
+		*'DIV_order_letter_no_1': '',
+		*'DIV_order_letter_no_2': '',
+		*'DIV_order_letter_no_3': '',
+
+		'fit_for_next_promotion': '', 	Boolean(0 or 1)
+		'fit_for_next_promotion_yes_text': '',
+		'fit_for_next_promotion_no_text': '',
+		
+		'fit_for_being_instructor': '', Boolean(0 or 1)
+		'fit_for_being_instructor_yes_text': '',
+		'fit_for_being_instructor_no_text': '',
+
+		'fit_for_foreign_mission': '', Boolean(0 or 1)
+		'fit_for_foreign_mission_yes_text': '',
+		'fit_for_foreign_mission_no_text': '',
+
+		'recommendation_for_next_appt': '',
+		'special_quality': '',
+		'remarks_by_initiating_officer': '',
+
+		*'grade': '',					Integer(0 ,1 ,2, 3, 4)
+	}
+	Response: {
+		"message": "Repost Data submitted successfully"
+	}
+
+Download Report:
+	URL: https://ahadsheikh.pythonanywhere.com/core/report/officer/<officer_id>/soldier/<soldier_id>/
+	It is not a json api. 
+	It will response a pdf.
+	Use a a tag to link the doenload link.

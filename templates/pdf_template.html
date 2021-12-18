@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .head-title{
+            font-weight: bold;
+            font-size: 13pt;
+        }
+        .right-align{
+            text-align: right;
+        }
+        .flex-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: left;
+        }
+        .flex-item{
+            width: 50%;
+        }
+        .flex-item2{
+            padding: 0 1rem;
+        }
+        .red-box{
+            display: inline-block;
+            background-color: red;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 0.2rem
+        }
+        .green-box{
+            display: inline-block;
+            background-color: green;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 0.2rem
+        }
+        .blue-box{
+            display: inline-block;
+            background-color: blue;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 0.2rem
+        }
+        .yes-circle{
+            background-color: #134613;
+            border-radius: 50%;
+            width: 0.5rem;
+            height: 0.5rem;
+            
+        }
+        .yes-box-green{
+            display: inline-block;
+            background-color: green;
+            width: 0.5rem;
+            height: 0.5rem;
+            border: 0.25rem solid green;
+            border-radius: 0.2rem;
+        }
+        .yes-box-red{
+            display: inline-block;
+            background-color: red;
+            width: 0.5rem;
+            height: 0.5rem;
+            border: 0.25rem solid red;
+            border-radius: 0.2rem;
+        }
+        .yes-box-blue{
+            display: inline-block;
+            background-color: blue;
+            width: 0.5rem;
+            height: 0.5rem;
+            border: 0.25rem solid blue;
+            border-radius: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="right-align">
+            <h2>ANNUAL CONFIDENTIAL REPORT</h2>
+            <div>
+                <p style="font-size: 12pt;">Tenure of evaluation: {{evaluation_date_from}} to {{evaluation_date_to}}</p>
+            </div>
+        </div>
+        <div style="margin-top: 2rem; font-size: 12pt;">
+            <div class="flex-container">
+                <div class="flex-item">
+                    <p><b>Personal No, Rank and Name:</b> {{ personal_no }}, {{ rank }} {{ name }}</p>
+                </div>
+                <div class="flex-item">
+                    <p><b>Appointment:</b> {{ appointment }}</p>
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="flex-item">
+                    <p><b>Date of enrolement:</b> {{ date_of_enrollment }}</p>
+                </div>
+                <div class="flex-item">
+                    <p><b>Date of last Promotion:</b> {{ last_promotion_date }}</p>
+                </div>
+            </div>
+
+            <div class="flex-container">
+                <div class="flex-item">
+                    <p><b>Unit:</b> {{ unit }}</p>
+                </div>
+                <div class="flex-item">
+                    <p><b>Medical Category:</b> {{ medical_category }}</p>
+                </div>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <h3>IPFT</h3>
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <div class="flex-container" style="width: 20rem;">
+                            {% if IPFT_first_biannual %}
+                            <b style="width: 40%;">First Biannual: </b>
+                            <div style="width: 33%;">
+                                <div class="yes-box-green">
+                                    <div class="yes-circle"></div>
+                                </div>
+                                Pass
+                            </div>
+                            <div style="width: 33%;">
+                                <span style="display: inline-block; background-color: red; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                                <span>Fail</span>
+                            </div>
+                            {% else %}
+                            <b style="width: 40%;">First Biannual: </b> 
+                            <div style="width: 33%;">
+                                <span style="display: inline-block; background-color: green; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                                <span>Pass</span>
+                            </div>
+                            <div style="width: 33%;">
+                                <div class="yes-box-red">
+                                    <div class="yes-circle"></div>
+                                </div>
+                                Fail
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="flex-item">
+                        <p><b>DIV Order letter no:</b> {{ DIV_order_letter_no_1 }}</p>
+                    </div>
+                </div>
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <div class="flex-container" style="width: 20rem;">
+                            {% if IPFT_second_biannual %}
+                            <b style="width: 40%;">Second Biannual: </b>
+                            <div style="width: 33%;">
+                                <div class="yes-box-green">
+                                    <div class="yes-circle"></div>
+                                </div>
+                                Pass
+                            </div>
+                            <div style="width: 33%;">
+                                <span style="display: inline-block; background-color: red; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                                <span>Fail</span>
+                            </div>
+                            {% else %}
+                            <b style="width: 40%;">Second Biannual: </b> 
+                            <div style="width: 33%;">
+                                <span style="display: inline-block; background-color: green; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                                <span>Pass</span>
+                            </div>
+                            <div style="width: 33%;">
+                                <div class="yes-box-red">
+                                    <div class="yes-circle"></div>
+                                </div>
+                                Fail
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="flex-item">
+                        <p><b>DIV Order letter no:</b> {{ DIV_order_letter_no_2 }}</p>
+                    </div>
+                </div>
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <div class="flex-container" style="width: 20rem;">
+                            {% if RET %}
+                            <b style="width: 40%;">RET: </b>
+                            <div style="width: 33%;">
+                                <div class="yes-box-green">
+                                    <div class="yes-circle"></div>
+                                </div>
+                                Pass
+                            </div>
+                            <div style="width: 33%;">
+                                <span style="display: inline-block; background-color: red; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                                <span>Fail</span>
+                            </div>
+                            {% else %}
+                            <b style="width: 40%;">RET: </b> 
+                            <div style="width: 33%;">
+                                <span style="display: inline-block; background-color: green; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                                <span>Pass</span>
+                            </div>
+                            <div style="width: 33%;">
+                                <div class="yes-box-red">
+                                    <div class="yes-circle"></div>
+                                </div>
+                                Fail
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="flex-item">
+                        <p><b>DIV Order letter no:</b> {{ DIV_order_letter_no_3 }}</p>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; margin: 1rem 0;">(Second Part)</p>
+            <h3 style="text-align: center; margin: 0.5rem 0;">Marks of main criteria on a scale of 10 in each field and out of 100 in total</h3>
+            <table style="margin-bottom: 1.5rem; font-size: 8pt; border: 1px solid black;">
+                <tr>
+                    {% for key, value in criteria.items %}
+                    <th style="white-space:pre-wrap; word-wrap:break-word; border: 1px solid black;">{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for key, value in criteria.items %}
+                        <td style="border: 1px solid black;">{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+            <div class="flex-container" style="width: 50rem;">
+                {% if fit_for_next_promotion %}
+                    <b style="width: 34%;">Is he fit for next promotion?</b>
+                    <div style="width: 33%;"> 
+                        <div class="yes-box-green">
+                            <div class="yes-circle"></div>
+                        </div>
+                        Yes ({{fit_for_next_promotion_yes_text}})
+                    </div>
+                    <div style="width: 33%">
+                        <span style="display: inline-block; background-color: red; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                        No ({{fit_for_next_promotion_no_text}})
+                    </div>
+                    {% else %}
+                    <b style="width: 34%">Is he fit for next promotion?</b>
+                    <div style="width: 33%">
+                        <span style="display: inline-block; background-color: green; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                        Yes ({{fit_for_next_promotion_yes_text}})
+                    </div>
+                    <div style="width: 33%;">
+                        <div class="yes-box-red">
+                            <div class="yes-circle"></div>
+                        </div>
+                        No ({{fit_for_next_promotion_no_text}})
+                    </div>
+                    {% endif %}
+            </div>
+            <div class="flex-container" style="width: 50rem;">
+                {% if fit_for_being_instructor %}
+                    <b style="width: 34%;">Is he fit for Being Instructor?</b>
+                    <div style="width: 33%;"> 
+                        <div class="yes-box-green">
+                            <div class="yes-circle"></div>
+                        </div>
+                        Yes ({{fit_for_being_instructor_yes_text}})
+                    </div>
+                    <div style="width: 33%">
+                        <span style="display: inline-block; background-color: red; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                        No ({{fit_for_being_instructor_no_text}})
+                    </div>
+                    {% else %}
+                    <b style="width: 34%">Is he fit for Being Instructor?</b>
+                    <div style="width: 33%">
+                        <span style="display: inline-block; background-color: green; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                        Yes ({{ fit_for_being_instructor_yes_text }})
+                    </div>
+                    <div style="width: 33%;">
+                        <div class="yes-box-red">
+                            <div class="yes-circle"></div>
+                        </div>
+                        No ({{ fit_for_being_instructor_no_text }})
+                    </div>
+                    {% endif %}
+            </div>
+            <div class="flex-container" style="width: 50rem;">
+                {% if fit_for_foreign_mission %}
+                    <b style="width: 34%;">Is he fit for Foreign Mission?</b>
+                    <div style="width: 33%;"> 
+                        <div class="yes-box-green">
+                            <div class="yes-circle"></div>
+                        </div>
+                        Yes ({{fit_for_foreign_mission_yes_text}})
+                    </div>
+                    <div style="width: 33%">
+                        <span style="display: inline-block; background-color: red; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                        No ({{fit_for_foreign_mission_no_text}})
+                    </div>
+                    {% else %}
+                    <b style="width: 34%">Is he fit for Foreign Mission?</b>
+                    <div style="width: 33%">
+                        <span style="display: inline-block; background-color: green; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                        Yes ({{fit_for_foreign_mission_yes_text}})
+                    </div>
+                    <div style="width: 33%;">
+                        <div class="yes-box-red">
+                            <div class="yes-circle"></div>
+                        </div>
+                        No ({{fit_for_foreign_mission_no_text}})
+                    </div>
+                    {% endif %}
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <p><b>Recommendation for next Appt:</b> {{ recommendation_for_next_appt }}</p>
+                <p><b>Special Quality (If any):</b> {{ special_quality }}</p>
+                <p><b>Remarks By Initiating Officer:</b> {{ remarks_by_initiating_officer }}</p>
+            </div>
+
+            <h3 style="margin-top: 1.5rem;">Grade</h3>  
+            <div class="flex-container">
+                {% for key, value in grade_text.items %}
+                {% if value == grade %}
+                <div class="flex-item2">
+                    <div class="yes-box-blue">
+                        <div class="yes-circle"></div>
+                    </div>
+                    <p>{{ key}}</p>
+                </div>
+                {% else %}
+                <div class="flex-item2">
+                    <div class="blue-box"></div>
+                    <p>{{ key }}</p>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div style="text-align: right; margin: 1.5rem 0;">
+                <p><b>BA No, Rank and Name:</b> {{ officer_ba }}, {{ officer_rank }} {{ officer_name }}</p>
+                <p><b>Appt:</b> {{ officer_appt }} <b>Unit:</b> {{ officer_unit }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
