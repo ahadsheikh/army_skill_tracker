@@ -89,9 +89,8 @@ class SolvierViewset(viewsets.ModelViewSet):
 
     def parse_valid_query_params(self):
         q = self.request.query_params
-        valid_query_params = ['personal_no', 'name', 'rank', 'address', 'unit',
-                        'subunit', 'appointment', 'join_date', 'commision_date', 
-                        'previous_company', 'mission']
+        valid_query_params = ['personal_no', 'name', 'rank', 'unit',
+                        'subunit', 'appointment', 'contact', 'unit_join_date', 'last_promotion_date', 'date_of_enrollment', 'previous_subunit', 'due_date_of_next_rank']
         q_dict = {}
         for key in q.keys():
             if key in valid_query_params:
