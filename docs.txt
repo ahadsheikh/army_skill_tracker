@@ -466,6 +466,7 @@ Add a Sub Criteria
     Body: {
         "criteria": 2,
         "name": "demo_1",
+		"subunit": "A coy",
         "mark": 10 // Optional
     }
     Response: {
