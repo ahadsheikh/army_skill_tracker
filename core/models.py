@@ -13,6 +13,7 @@ class Criteria(models.Model):
 class SubCriteria(models.Model):
     criteria = models.ForeignKey(Criteria, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+    subunit = models.CharField(max_length=20)
     mark = models.PositiveIntegerField(default=0)
 
     def __str__(self):

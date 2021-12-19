@@ -113,6 +113,28 @@ class SubCriteriaViewset(viewsets.ModelViewSet):
     queryset = SubCriteria.objects.all()
     serializer_class = SubCriteriaSerializer
 
+    def get_queryset(self):
+        q = self.parse_valid_query_params()
+        if self.action == 'list':
+            if bool(q):
+                try:
+                    queryset = SubCriteria.objects.filter(**q)
+                except ValidationError as v:
+                    queryset = SubCriteria.objects.none()
+                return queryset
+            else:
+                return super().get_queryset()
+        else:
+            return super().get_queryset()
+
+    def parse_valid_query_params(self):
+        q = self.request.query_params
+        valid_query_params = ['criteria', 'subunit']
+        q_dict = {}
+        for key in q.keys():
+            if key in valid_query_params:
+                q_dict[key] = q[key]
+        return q_dict
 
 class MakeCriteria(views.APIView):
     def get(self, request):
@@ -129,12 +151,13 @@ class MakeCriteria(views.APIView):
 
 class CriteriaChangeView(views.APIView):
     def get(self, request, id):
+        q = request.query_params
         criteria = get_object_or_404(Criteria, pk=id)
         c_data = CriteriaSerializer(criteria).data
         c_data['id'] = criteria.id
         c_data['sub_criterias'] = []
 
-        sub_cries = SubCriteria.objects.filter(criteria_id=id)
+        sub_cries = SubCriteria.objects.filter(criteria_id=id, subunit=q['subunit'])
         for sub_cri in sub_cries:
             s_data = SubCriteriaSerializer(sub_cri).data
             del s_data['criteria']

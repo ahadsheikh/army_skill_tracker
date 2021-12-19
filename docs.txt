@@ -434,7 +434,8 @@ Make Criterias
 
 Get All Criteria
     URL: https://ahadsheikh.pythonanywhere.com/core/criterias/
-	Method: GET
+	Method: GET,
+	Params: criteria, subunit
 	Response: [
         {
             "id": 2,
@@ -492,6 +493,7 @@ Delete a Sub Criteria
 Criteria and SubCriteria GET
     URL: https://ahadsheikh.pythonanywhere.com/core/change-criteria/<criteria_id>/
 	Method: GET
+	Params: subunit
 	Response: {
         "id": 2,
         "name": "criteria_name",
@@ -500,11 +502,13 @@ Criteria and SubCriteria GET
             {
                 "id": 1,
                 "name": "demo_1",
+				"subunit": "A coy",
                 "mark": 0
             },
             {
                 "id": 2,
                 "name": "demo_2",
+				"subunit": "A coy",
                 "mark": 0
             }
         ]
