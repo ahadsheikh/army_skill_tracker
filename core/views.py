@@ -380,7 +380,6 @@ def report_download(request, off_id, sol_id):
     soldier = get_object_or_404(Soldier, pk=sol_id)
     officer = get_object_or_404(Officer, pk=off_id)
     report = SoldierReport.objects.filter(soldier=soldier)
-    print(report[0].evaluation_date_from)
     if(report.count() == 0):
         return HttpResponse("<h3>PDF not found</h3>", status=status.HTTP_404_NOT_FOUND)
     else:
