@@ -12,6 +12,7 @@ from .views import (
     report_page,
     report_download,
     ReportForm,
+    isReportFenerated
 )
 
 router = routers.DefaultRouter()
@@ -28,6 +29,7 @@ urlpatterns = [
     path('observations/soldier/<int:id>/', SoldierObservationView.as_view(), name='observations'),
     path('test/', report_page, name='report_page'),
     path('report/soldier/<int:id>/', ReportForm.as_view(), name='report_form'),
+    path('report/download/check/<int:id>/', isReportFenerated.as_view(), name='is_report_generated'),
     path('report/download/officer/<int:off_id>/soldier/<int:sol_id>/', report_download, name='report_download')
 ]
 

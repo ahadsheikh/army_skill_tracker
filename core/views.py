@@ -363,6 +363,15 @@ class ReportForm(views.APIView):
             status=status.HTTP_201_CREATED
         )    
 
+class isReportFenerated(views.APIView):
+    def get(self, request, id):
+        soldier = get_object_or_404(Soldier, pk=id)
+        report = SoldierReport.objects.filter(soldier=soldier)
+        if report.count() == 0:
+            return Response({'status': False}, status=status.HTTP_200_OK)
+        else:
+            return Response({'status': True}, status=status.HTTP_200_OK)
+
 
 # Not view. 
 def render_to_pdf(template_src, context_dict):
