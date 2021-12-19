@@ -739,3 +739,10 @@ Download Report:
 	It is not a json api. 
 	It will response a pdf.
 	Use a a tag to link the doenload link.
+
+Check Report:
+	URL: https://ahadsheikh.pythonanywhere.com/core/report/download/check/<soldier_id>/
+	Method: GET
+	Response: {
+		"status": true
+	}
