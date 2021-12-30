@@ -36,10 +36,10 @@ class Soldier(models.Model):
     subunit = models.CharField(max_length=20)
     appointment = models.CharField(max_length=50)
     unit_join_date = models.DateField(blank=True)
-    last_promotion_date = models.DateField(blank=True)
+    last_promotion_date = models.DateField(blank=True, null=True)
     contact = models.CharField(max_length=50)
     date_of_enrollment = models.DateField(blank=True)
-    previous_subunit = models.CharField(max_length=20)
+    previous_subunit = models.CharField(max_length=20, blank=True, null=True)
     due_date_of_next_rank = models.DateField(blank=True)
     observations = models.ManyToManyField(Observation)
 
