@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Document</title>
 
     <style type="text/css">
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
-        .container{
+
+        .container {
             font-family: 'Times New Roman', Times, serif;
         }
-        .head-title{
+
+        .head-title {
             font-weight: bold;
             font-size: 13pt;
         }
-        .center-align{
+
+        .center-align {
             text-align: center;
         }
-        .flex-container{
+
+        .flex-container {
             display: flex;
             flex-direction: row;
             justify-content: left;
         }
-        .flex-item{
+
+        .flex-item {
             width: 50%;
         }
-        .flex-item2{
+
+        .flex-item2 {
             padding: 0 1rem;
         }
-        .tick-box{
+
+        .tick-box {
             display: inline-block;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="center-align">
@@ -43,14 +52,14 @@
             </div>
         </div>
         <div style="margin-top: 2rem; font-size: 12pt;">
+
             <div>
-                <div class="flex-item">
-                    <p><b>Personal No, Rank and Name:</b> {{ personal_no }}, {{ rank }} {{ name }}</p>
-                </div>
-                <div class="flex-item">
-                    <p><b>Appointment:</b> {{ appointment }}</p>
-                </div>
+                <p><b>Personal No, Rank and Name:</b> {{ personal_no }}, {{ rank }} {{ name }}</p>
             </div>
+            <div>
+                <p><b>Appointment:</b> {{ appointment }}</p>
+            </div>
+
             <div class="flex-container">
                 <div class="flex-item">
                     <p><b>Date of enrolement:</b> {{ date_of_enrollment }}</p>
@@ -84,7 +93,7 @@
                                 <span>Fail</span>
                             </div>
                             {% else %}
-                            <b style="width: 50%;margin-left: 1em;">First Biannual: </b> 
+                            <b style="width: 50%;margin-left: 1em;">First Biannual: </b>
                             <div style="width: 33%;">
                                 <div class="tick-box">&#9744;</div>
                                 <span>Pass</span>
@@ -114,7 +123,7 @@
                                 <span>Fail</span>
                             </div>
                             {% else %}
-                            <b style="width: 50%; margin-left: 1em;">Second Biannual: </b> 
+                            <b style="width: 50%; margin-left: 1em;">Second Biannual: </b>
                             <div style="width: 33%;">
                                 <div class="tick-box">&#9744;</div>
                                 <span>Pass</span>
@@ -144,7 +153,7 @@
                                 <span>Fail</span>
                             </div>
                             {% else %}
-                            <h3 style="width: 47%;">RET: </h3> 
+                            <h3 style="width: 47%;">RET: </h3>
                             <div style="width: 28%;">
                                 <div class="tick-box">&#9744;</div>
                                 <span>Pass</span>
@@ -162,7 +171,8 @@
                 </div>
             </div>
             <p style="text-align: center; margin: 1rem 0;">(Second Part)</p>
-            <h3 style="text-align: center; margin: 0.5rem 0;">Marks of main criteria on a scale of 10 in each field and out of 100 in total</h3>
+            <h3 style="text-align: center; margin: 0.5rem 0;">Marks of main criteria on a scale of 10 in each field and
+                out of 100 in total</h3>
             <table style="margin-bottom: 1.5rem; font-size: 8pt; border: 1px solid black;">
                 <tr>
                     {% for key, value in criteria.items %}
@@ -171,78 +181,78 @@
                 </tr>
                 <tr>
                     {% for key, value in criteria.items %}
-                        <td style="border: 1px solid black;">{{ value }}</td>
+                    <td style="border: 1px solid black;">{{ value }}</td>
                     {% endfor %}
                 </tr>
             </table>
             <div class="flex-container" style="width: 50rem;">
                 {% if fit_for_next_promotion %}
-                    <b style="width: 34%;">Is he fit for next promotion?</b>
-                    <div style="width: 33%;"> 
-                        <div class="tick-box">&#9745;</div>
-                        Yes ({{fit_for_next_promotion_yes_text}})
-                    </div>
-                    <div style="width: 33%">
-                        <div class="tick-box">&#9744;</div>
-                        No ({{fit_for_next_promotion_no_text}})
-                    </div>
-                    {% else %}
-                    <b style="width: 34%">Is he fit for next promotion?</b>
-                    <div style="width: 33%">
-                        <div class="tick-box">&#9744;</div>
-                        Yes ({{fit_for_next_promotion_yes_text}})
-                    </div>
-                    <div style="width: 33%;">
-                        <div class="tick-box">&#9745;</div>
-                        No ({{fit_for_next_promotion_no_text}})
-                    </div>
-                    {% endif %}
+                <b style="width: 34%;">Is he fit for next promotion?</b>
+                <div style="width: 33%;">
+                    <div class="tick-box">&#9745;</div>
+                    Yes ({{fit_for_next_promotion_yes_text}})
+                </div>
+                <div style="width: 33%">
+                    <div class="tick-box">&#9744;</div>
+                    No ({{fit_for_next_promotion_no_text}})
+                </div>
+                {% else %}
+                <b style="width: 34%">Is he fit for next promotion?</b>
+                <div style="width: 33%">
+                    <div class="tick-box">&#9744;</div>
+                    Yes ({{fit_for_next_promotion_yes_text}})
+                </div>
+                <div style="width: 33%;">
+                    <div class="tick-box">&#9745;</div>
+                    No ({{fit_for_next_promotion_no_text}})
+                </div>
+                {% endif %}
             </div>
             <div class="flex-container" style="width: 50rem;">
                 {% if fit_for_being_instructor %}
-                    <b style="width: 34%;">Is he fit for Being Instructor?</b>
-                    <div style="width: 33%;"> 
-                        <div class="tick-box">&#9745;</div>
-                        Yes ({{fit_for_being_instructor_yes_text}})
-                    </div>
-                    <div style="width: 33%">
-                        <div class="tick-box">&#9744;</div>
-                        No ({{fit_for_being_instructor_no_text}})
-                    </div>
-                    {% else %}
-                    <b style="width: 34%">Is he fit for Being Instructor?</b>
-                    <div style="width: 33%">
-                        <div class="tick-box">&#9744;</div>
-                        Yes ({{ fit_for_being_instructor_yes_text }})
-                    </div>
-                    <div style="width: 33%;">
-                        <div class="tick-box">&#9745;</div>
-                        No ({{ fit_for_being_instructor_no_text }})
-                    </div>
-                    {% endif %}
+                <b style="width: 34%;">Is he fit for Being Instructor?</b>
+                <div style="width: 33%;">
+                    <div class="tick-box">&#9745;</div>
+                    Yes ({{fit_for_being_instructor_yes_text}})
+                </div>
+                <div style="width: 33%">
+                    <div class="tick-box">&#9744;</div>
+                    No ({{fit_for_being_instructor_no_text}})
+                </div>
+                {% else %}
+                <b style="width: 34%">Is he fit for Being Instructor?</b>
+                <div style="width: 33%">
+                    <div class="tick-box">&#9744;</div>
+                    Yes ({{ fit_for_being_instructor_yes_text }})
+                </div>
+                <div style="width: 33%;">
+                    <div class="tick-box">&#9745;</div>
+                    No ({{ fit_for_being_instructor_no_text }})
+                </div>
+                {% endif %}
             </div>
             <div class="flex-container" style="width: 50rem;">
                 {% if fit_for_foreign_mission %}
-                    <b style="width: 34%;">Is he fit for Foreign Mission?</b>
-                    <div style="width: 33%;"> 
-                        <div class="tick-box">&#9745;</div>
-                        Yes ({{fit_for_foreign_mission_yes_text}})
-                    </div>
-                    <div style="width: 33%">
-                        <div class="tick-box">&#9744;</div>
-                        No ({{fit_for_foreign_mission_no_text}})
-                    </div>
-                    {% else %}
-                    <b style="width: 34%">Is he fit for Foreign Mission?</b>
-                    <div style="width: 33%">
-                        <div class="tick-box">&#9744;</div>
-                        Yes ({{fit_for_foreign_mission_yes_text}})
-                    </div>
-                    <div style="width: 33%;">
-                        <div class="tick-box">&#9745;</div>
-                        No ({{fit_for_foreign_mission_no_text}})
-                    </div>
-                    {% endif %}
+                <b style="width: 34%;">Is he fit for Foreign Mission?</b>
+                <div style="width: 33%;">
+                    <div class="tick-box">&#9745;</div>
+                    Yes ({{fit_for_foreign_mission_yes_text}})
+                </div>
+                <div style="width: 33%">
+                    <div class="tick-box">&#9744;</div>
+                    No ({{fit_for_foreign_mission_no_text}})
+                </div>
+                {% else %}
+                <b style="width: 34%">Is he fit for Foreign Mission?</b>
+                <div style="width: 33%">
+                    <div class="tick-box">&#9744;</div>
+                    Yes ({{fit_for_foreign_mission_yes_text}})
+                </div>
+                <div style="width: 33%;">
+                    <div class="tick-box">&#9745;</div>
+                    No ({{fit_for_foreign_mission_no_text}})
+                </div>
+                {% endif %}
             </div>
             <div style="margin-top: 1.5rem;">
                 <p><b>Recommendation for next Appt:</b> {{ recommendation_for_next_appt }}</p>
@@ -250,7 +260,7 @@
                 <p><b>Remarks By Initiating Officer:</b> {{ remarks_by_initiating_officer }}</p>
             </div>
 
-            <h3 style="margin-top: 1.5rem;">Grade</h3>  
+            <h3 style="margin-top: 1.5rem;">Grade</h3>
             <div class="flex-container">
                 {% for key, value in grade_text.items %}
                 {% if value == grade %}
@@ -276,4 +286,5 @@
         </div>
     </div>
 </body>
+
 </html>
