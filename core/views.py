@@ -296,7 +296,7 @@ class ReportForm(views.APIView):
             else:
                 cri[mark.sub_criteria.criteria.name] += mark.mark
             total += mark.mark
-        cri['totla_marks'] = total
+        cri['total_marks'] = total
             
         context = {
             'evaluation_date_from': '',
@@ -401,7 +401,7 @@ def report_download(request, off_id, sol_id):
             else:
                 cri[mark.sub_criteria.criteria.name] += mark.mark
             total += mark.mark
-        cri['totla_marks'] = total
+        cri['total_marks'] = total
 
         context = {
             'pagesize': 'A4',

@@ -15,8 +15,8 @@
             font-weight: bold;
             font-size: 13pt;
         }
-        .right-align{
-            text-align: right;
+        .center-align{
+            text-align: center;
         }
         .flex-container{
             display: flex;
@@ -29,70 +29,21 @@
         .flex-item2{
             padding: 0 1rem;
         }
-        .red-box{
+        .tick-box{
             display: inline-block;
-            background-color: red;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 0.2rem
-        }
-        .green-box{
-            display: inline-block;
-            background-color: green;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 0.2rem
-        }
-        .blue-box{
-            display: inline-block;
-            background-color: blue;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 0.2rem
-        }
-        .yes-circle{
-            background-color: #134613;
-            border-radius: 50%;
-            width: 0.5rem;
-            height: 0.5rem;
-            
-        }
-        .yes-box-green{
-            display: inline-block;
-            background-color: green;
-            width: 0.5rem;
-            height: 0.5rem;
-            border: 0.25rem solid green;
-            border-radius: 0.2rem;
-        }
-        .yes-box-red{
-            display: inline-block;
-            background-color: red;
-            width: 0.5rem;
-            height: 0.5rem;
-            border: 0.25rem solid red;
-            border-radius: 0.2rem;
-        }
-        .yes-box-blue{
-            display: inline-block;
-            background-color: blue;
-            width: 0.5rem;
-            height: 0.5rem;
-            border: 0.25rem solid blue;
-            border-radius: 0.2rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="right-align">
+        <div class="center-align">
             <h2>ANNUAL CONFIDENTIAL REPORT</h2>
             <div>
                 <p style="font-size: 12pt;">Tenure of evaluation: Jan. 1, 2021 to Dec. 1, 2021</p>
             </div>
         </div>
         <div style="margin-top: 2rem; font-size: 12pt;">
-            <div class="flex-container">
+            <div>
                 <div class="flex-item">
                     <p><b>Personal No, Rank and Name:</b> 1, 1 Soldier1</p>
                 </div>
@@ -123,15 +74,13 @@
                     <div class="flex-item">
                         <div class="flex-container" style="width: 20rem;">
                             
-                            <b style="width: 40%;">First Biannual: </b> 
+                            <b style="width: 50%;margin-left: 1em;">First Biannual: </b> 
                             <div style="width: 33%;">
-                                <span style="display: inline-block; background-color: green; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                                <div class="tick-box">&#9744;</div>
                                 <span>Pass</span>
                             </div>
                             <div style="width: 33%;">
-                                <div class="yes-box-red">
-                                    <div class="yes-circle"></div>
-                                </div>
+                                <div class="tick-box">&#9745;</div>
                                 Fail
                             </div>
                             
@@ -145,15 +94,13 @@
                     <div class="flex-item">
                         <div class="flex-container" style="width: 20rem;">
                             
-                            <b style="width: 40%;">Second Biannual: </b>
+                            <b style="width: 50%;margin-left: 1em;">Second Biannual: </b>
                             <div style="width: 33%;">
-                                <div class="yes-box-green">
-                                    <div class="yes-circle"></div>
-                                </div>
+                                <div class="tick-box">&#9745;</div>
                                 Pass
                             </div>
                             <div style="width: 33%;">
-                                <span style="display: inline-block; background-color: red; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                                <div class="tick-box">&#9744;</div>
                                 <span>Fail</span>
                             </div>
                             
@@ -167,15 +114,13 @@
                     <div class="flex-item">
                         <div class="flex-container" style="width: 20rem;">
                             
-                            <b style="width: 40%;">RET: </b> 
-                            <div style="width: 33%;">
-                                <span style="display: inline-block; background-color: green; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                            <h3 style="width: 47%;">RET: </h3> 
+                            <div style="width: 28%;">
+                                <div class="tick-box">&#9744;</div>
                                 <span>Pass</span>
                             </div>
-                            <div style="width: 33%;">
-                                <div class="yes-box-red">
-                                    <div class="yes-circle"></div>
-                                </div>
+                            <div style="width: 28%;">
+                                <div class="tick-box">&#9745;</div>
                                 Fail
                             </div>
                             
@@ -191,7 +136,7 @@
             <table style="margin-bottom: 1.5rem; font-size: 8pt; border: 1px solid black;">
                 <tr>
                     
-                    <th style="white-space:pre-wrap; word-wrap:break-word; border: 1px solid black;">totla_marks</th>
+                    <th style="white-space:pre-wrap; word-wrap:break-word; border: 1px solid black;">total_marks</th>
                     
                 </tr>
                 <tr>
@@ -204,13 +149,11 @@
                 
                     <b style="width: 34%">Is he fit for next promotion?</b>
                     <div style="width: 33%">
-                        <span style="display: inline-block; background-color: green; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                        <div class="tick-box">&#9744;</div>
                         Yes (Y)
                     </div>
                     <div style="width: 33%;">
-                        <div class="yes-box-red">
-                            <div class="yes-circle"></div>
-                        </div>
+                        <div class="tick-box">&#9745;</div>
                         No (N)
                     </div>
                     
@@ -219,13 +162,11 @@
                 
                     <b style="width: 34%;">Is he fit for Being Instructor?</b>
                     <div style="width: 33%;"> 
-                        <div class="yes-box-green">
-                            <div class="yes-circle"></div>
-                        </div>
+                        <div class="tick-box">&#9745;</div>
                         Yes (Y)
                     </div>
                     <div style="width: 33%">
-                        <span style="display: inline-block; background-color: red; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                        <div class="tick-box">&#9744;</div>
                         No (N)
                     </div>
                     
@@ -234,13 +175,11 @@
                 
                     <b style="width: 34%">Is he fit for Foreign Mission?</b>
                     <div style="width: 33%">
-                        <span style="display: inline-block; background-color: green; width: 1rem; height: 1rem; border-radius: 0.2rem"></span>
+                        <div class="tick-box">&#9744;</div>
                         Yes (N)
                     </div>
                     <div style="width: 33%;">
-                        <div class="yes-box-red">
-                            <div class="yes-circle"></div>
-                        </div>
+                        <div class="tick-box">&#9745;</div>
                         No (A)
                     </div>
                     
@@ -256,44 +195,45 @@
                 
                 
                 <div class="flex-item2">
-                    <div class="yes-box-blue">
-                        <div class="yes-circle"></div>
-                    </div>
+                    <div class="tick-box">&#9745;</div>
                     <p>Outstanding (91-100)</p>
                 </div>
                 
                 
                 
                 <div class="flex-item2">
-                    <div class="blue-box"></div>
+                    <div class="tick-box">&#9744;</div>
                     <p>Above Average (81-90)</p>
                 </div>
                 
                 
                 
                 <div class="flex-item2">
-                    <div class="blue-box"></div>
+                    <div class="tick-box">&#9744;</div>
                     <p>High Average (71-80)</p>
                 </div>
                 
                 
                 
                 <div class="flex-item2">
-                    <div class="blue-box"></div>
+                    <div class="tick-box">&#9744;</div>
                     <p>Average (61-70)</p>
                 </div>
                 
                 
                 
                 <div class="flex-item2">
-                    <div class="blue-box"></div>
+                    <div class="tick-box">&#9744;</div>
                     <p>Below Average (51-60)</p>
                 </div>
                 
                 
             </div>
+            <div class="flex-container" style="justify-content: flex-end; margin-top: 7em;">
+                <hr style="width: 17em;">
+            </div>
             <div style="text-align: right; margin: 1.5rem 0;">
-                <p><b>BA No, Rank and Name:</b> 1, 1 Officer</p>
+                <p><b>BA No, Rank and Name:</b> BA-1, 1 Officer</p>
                 <p><b>Appt:</b> 1 <b>Unit:</b> A coy</p>
             </div>
         </div>
