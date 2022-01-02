@@ -197,7 +197,7 @@ class AssessmentView(views.APIView):
 
         sum = 0
 
-        sub_cries = SubCriteria.objects.filter(criteria=criteria)
+        sub_cries = SubCriteria.objects.filter(criteria=criteria, subunit=soldier.subunit)
         for sub_cri in sub_cries:
             s_data = SubCriteriaSerializer(sub_cri).data
             del s_data['criteria']
