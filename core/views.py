@@ -305,8 +305,8 @@ class ReportForm(views.APIView):
             'rank': soldier.rank,
             'name': soldier.name,
             'appointment': soldier.appointment,
-            'date_of_enrollment': soldier.date_of_enrollment.strftime("%d %B, %Y") if soldier.date_of_enrollment else '',
-            'last_promotion_date': soldier.last_promotion_date.strftime("%d %B, %Y") if soldier.last_promotion_date else '',
+            'date_of_enrollment': soldier.date_of_enrollment.strftime("%d %B %Y") if soldier.date_of_enrollment else '',
+            'last_promotion_date': soldier.last_promotion_date.strftime("%d %B %Y") if soldier.last_promotion_date else '',
             'unit': soldier.unit,
             'medical_category': '',
 
@@ -407,14 +407,14 @@ def report_download(request, off_id, sol_id):
 
         context = {
             'pagesize': 'A4',
-            'evaluation_date_from': report[0].evaluation_date_from.strftime("%d %B, %Y"),
-            'evaluation_date_to': report[0].evaluation_date_to.strftime("%d %B, %Y"),
+            'evaluation_date_from': report[0].evaluation_date_from.strftime("%d %B %Y"),
+            'evaluation_date_to': report[0].evaluation_date_to.strftime("%d %B %Y"),
             'personal_no': soldier.personal_no,
             'rank': soldier.rank,
             'name': soldier.name,
             'appointment': soldier.appointment,
-            'date_of_enrollment': soldier.date_of_enrollment.strftime("%d %B, %Y") if soldier.date_of_enrollment else '',
-            'last_promotion_date': soldier.last_promotion_date.strftime("%d %B, %Y") if soldier.last_promotion_date else '',
+            'date_of_enrollment': soldier.date_of_enrollment.strftime("%d %B %Y") if soldier.date_of_enrollment else '',
+            'last_promotion_date': soldier.last_promotion_date.strftime("%d %B %Y") if soldier.last_promotion_date else '',
             'unit': soldier.unit,
             'medical_category': report[0].medical_category,
 
