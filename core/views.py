@@ -318,7 +318,7 @@ class ReportForm(views.APIView):
             'DIV_order_letter_no_3': '',
 
             # Marks of different criteria 
-            'criteria_name': cri,
+            'criteria': cri,
 
             'fit_for_next_promotion': '',
             'fit_for_next_promotion_yes_text': '',
