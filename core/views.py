@@ -305,8 +305,8 @@ class ReportForm(views.APIView):
             'rank': soldier.rank,
             'name': soldier.name,
             'appointment': soldier.appointment,
-            'date_of_enrollment': soldier.date_of_enrollment.strftime("%d %B, %Y"),
-            'last_promotion_date': soldier.last_promotion_date.strftime("%d %B, %Y"),
+            'date_of_enrollment': soldier.date_of_enrollment.strftime("%d %B, %Y") if soldier.date_of_enrollment else '',
+            'last_promotion_date': soldier.last_promotion_date.strftime("%d %B, %Y") if soldier.last_promotion_date else '',
             'unit': soldier.unit,
             'medical_category': '',
 
@@ -413,8 +413,8 @@ def report_download(request, off_id, sol_id):
             'rank': soldier.rank,
             'name': soldier.name,
             'appointment': soldier.appointment,
-            'date_of_enrollment': soldier.date_of_enrollment.strftime("%d %B, %Y"),
-            'last_promotion_date': soldier.last_promotion_date.strftime("%d %B, %Y"),
+            'date_of_enrollment': soldier.date_of_enrollment.strftime("%d %B, %Y") if soldier.date_of_enrollment else '',
+            'last_promotion_date': soldier.last_promotion_date.strftime("%d %B, %Y") if soldier.last_promotion_date else '',
             'unit': soldier.unit,
             'medical_category': report[0].medical_category,
 
