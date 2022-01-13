@@ -1,7 +1,7 @@
 from django.contrib.auth import models
 from django.db.models import fields
 from rest_framework import serializers
-from .models import Criteria, Observation, Soldier, SubCriteria, SoldierReport
+from .models import Criteria, Observation, Soldier, SoldierExtra, SubCriteria, SoldierReport
 
 
 class SoldierSerializer(serializers.ModelSerializer):
@@ -58,6 +58,12 @@ class ReportFormSerializer(serializers.ModelSerializer):
             'fit_for_being_instructor_no_text', 'fit_for_foreign_mission',
             'fit_for_foreign_mission_yes_text', 'fit_for_foreign_mission_no_text', 
             'recommendation_for_next_appt','special_quality', 'remarks_by_initiating_officer', 'grade']
+
+class SoldierExtraSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = SoldierExtra
+        fields = ['id', 'soldier', 'medical_category', 'IPFT_first_biannual', 'IPFT_second_biannual', 'RET']
 
 
 

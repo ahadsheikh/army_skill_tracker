@@ -15,10 +15,10 @@ from django.http import HttpResponse
 import weasyprint
 
 from clerk.serializers import ImageUploadSerializer
-from core.serializers import ( CriteriaChangeViewSerializer, ObservationSerializer, 
+from core.serializers import ( CriteriaChangeViewSerializer, ObservationSerializer, SoldierExtraSerializer, 
                                 SoldierObservationSeralizer, SoldierSerializer, 
                                 CriteriaSerializer, SubCriteriaSerializer, ReportFormSerializer )
-from core.models import Criteria, Observation, Soldier, SoldierMark, SubCriteria, SoldierReport
+from core.models import Criteria, Observation, Soldier, SoldierExtra, SoldierMark, SubCriteria, SoldierReport
 from officer.models import Officer
     
 
@@ -531,3 +531,8 @@ def report_page(request):
         'officer_unit': 'Officer Unit'
     }
     return render(request, 'pdf_template.html', context=context)
+
+
+class SoldierExtraView(viewsets.ModelViewSet):
+    queryset = SoldierExtra.objects.all()
+    serializer_class = SoldierExtraSerializer

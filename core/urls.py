@@ -1,6 +1,7 @@
 from django.urls import path
 from rest_framework import routers, views
 from .views import (
+    SoldierExtraView,
     SolvierViewset, 
     CriteriaViewset, 
     SubCriteriaViewset, 
@@ -20,6 +21,7 @@ router.register(r'soldiers', SolvierViewset)
 router.register(r'criterias', CriteriaViewset)
 router.register(r'subcriterias', SubCriteriaViewset)
 router.register(r'observations', ObservationsViewset)
+router.register(r'soldierextra', SoldierExtraView)
 
 
 urlpatterns = [

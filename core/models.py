@@ -1,4 +1,5 @@
 from re import S
+from statistics import mode
 from django.db import models
 
 
@@ -89,3 +90,11 @@ class SoldierReport(models.Model):
 
     def __str__(self):
         return f"Annual Report for {self.soldier.name}"
+
+
+class SoldierExtra(models.Model):
+    soldier = models.OneToOneField(Soldier, on_delete=models.CASCADE)
+    medical_category = models.CharField(max_length=1)
+    IPFT_first_biannual = models.BooleanField()
+    IPFT_second_biannual = models.BooleanField()
+    RET = models.BooleanField()
