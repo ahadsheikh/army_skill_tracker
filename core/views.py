@@ -536,3 +536,11 @@ def report_page(request):
 class SoldierExtraView(viewsets.ModelViewSet):
     queryset = SoldierExtra.objects.all()
     serializer_class = SoldierExtraSerializer
+
+
+class SoldierExtraBySoldier(views.APIView):
+
+    def get(self, request, id):
+        extra = get_object_or_404(SoldierExtra, soldier=id)
+        serializer = SoldierExtraSerializer(extra)
+        return Response(serializer.data)
