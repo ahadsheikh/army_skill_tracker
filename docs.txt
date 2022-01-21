@@ -801,6 +801,19 @@ SoldierExtra API:
 			"IPFT_second_biannual": false,
 			"RET": false
 		}
+
+	Get by Soldier ID:
+		URL: http://localhost:8000/core/soldierextra/soldier/<soldier_id>/
+		Method: GET
+		Response: {
+			"id": 1,
+			"soldier": 1,
+			"medical_category": "A",
+			"IPFT_first_biannual": true,
+			"IPFT_second_biannual": false,
+			"RET": false
+		}
+		
 	Update:
 		URL: http://localhost:8000/core/soldierextra/<id>/
 		Method: PUT 	* Partial update support. but then request method need to be PATCH
