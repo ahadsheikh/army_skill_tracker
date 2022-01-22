@@ -803,7 +803,7 @@ SoldierExtra API:
 		}
 
 	Get by Soldier ID:
-		URL: http://localhost:8000/core/soldierextra/soldier/<soldier_id>/
+		URL: http://localhost:8000/core/soldier-extra/soldier/<soldier_id>/
 		Method: GET
 		Response: {
 			"id": 1,
