@@ -341,7 +341,6 @@ class ReportForm(views.APIView):
         return Response(context, status=status.HTTP_200_OK)
 
     def post(self, request, id):
-        print(request.data)
         soldier = get_object_or_404(Soldier, pk=id)
         report = SoldierReport.objects.filter(soldier=soldier)
         report_form_serializer = ReportFormSerializer(data=request.data)
@@ -401,7 +400,7 @@ def report_download(request, off_id, sol_id):
             else:
                 cri[mark.sub_criteria.criteria.name] += mark.mark
             total += mark.mark
-        cri['total_marks'] = total
+        cri['Total Marks'] = total
 
         print(type(report[0].evaluation_date_from))
 
