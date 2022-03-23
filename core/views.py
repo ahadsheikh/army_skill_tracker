@@ -30,9 +30,9 @@ def predict(request,pk):
     s = Soldier.objects.get(id=pk)
     sldr_xtra = SoldierExtra.objects.get(soldier=s)
     print(sldr_xtra)
-    instr = os.path.join(BASE_DIR,'models\svm_instr.sav')
-    promotion = os.path.join(BASE_DIR,'models\svm_promotion.sav')
-    msn = os.path.join(BASE_DIR,'models\svm_msn.sav')
+    instr = os.path.join(BASE_DIR,'models/svm_instr.sav')
+    promotion = os.path.join(BASE_DIR,'models/svm_promotion.sav')
+    msn = os.path.join(BASE_DIR,'models/svm_msn.sav')
     # load model
     pick = open(instr,'rb')
     model_instr = pickle.load(pick)
