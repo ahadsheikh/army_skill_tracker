@@ -36,7 +36,7 @@ urlpatterns = [
     path('report/download/check/<int:id>/', isReportFenerated.as_view(), name='is_report_generated'),
     path('report/download/officer/<int:off_id>/soldier/<int:sol_id>/', report_download, name='report_download'),
     path('soldier-extra/soldier/<int:id>/', SoldierExtraBySoldier.as_view(), name='soldier_extra'),
-    path('predict/<str:pk/>', views.predict, name='predict')
+    path('predict/<int:pk/>', views.predict, name='predict')
 ]
 
 urlpatterns += router.urls
