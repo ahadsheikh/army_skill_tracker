@@ -20,7 +20,55 @@ from core.serializers import ( CriteriaChangeViewSerializer, ObservationSerializ
                                 CriteriaSerializer, SubCriteriaSerializer, ReportFormSerializer )
 from core.models import Criteria, Observation, Soldier, SoldierExtra, SoldierMark, SubCriteria, SoldierReport
 from officer.models import Officer
+import os
+from army_project.settings import BASE_DIR
+import pickle
     
+
+@api_view(('GET',))
+def predict(request,pk):
+    s = Soldier.objects.get(id=pk)
+    sldr_xtra = SoldierExtra.objects.get(soldier=s)
+    print(sldr_xtra)
+    instr = os.path.join(BASE_DIR,'models\svm_instr.sav')
+    promotion = os.path.join(BASE_DIR,'models\svm_promotion.sav')
+    msn = os.path.join(BASE_DIR,'models\svm_msn.sav')
+    # load model
+    pick = open(instr,'rb')
+    model_instr = pickle.load(pick)
+    pick.close()
+
+    pick = open(promotion,'rb')
+    model_promotion = pickle.load(pick)
+    pick.close()
+
+    pick = open(msn,'rb')
+    model_msn = pickle.load(pick)
+    pick.close()
+
+    mark = SoldierMark.objects.filter(soldier=s)
+    total = 0
+    for m in mark:
+        total = total + m.mark
+    med = 0
+    if sldr_xtra.medical_category == 'A':
+        med = 1
+    ipft1 = 0
+    if sldr_xtra.IPFT_first_biannual == True:
+        ipft1 = 1
+    ipft2 = 0
+    if sldr_xtra.IPFT_second_biannual == True:
+        ipft2 = 1
+    ret = 0
+    if sldr_xtra.RET == True:
+        ret = 1
+    instr_prob = round(model_instr.predict_proba([[med,ipft1,ipft2,ret,total]])[0][1] * 100,2)
+    promotion_prob = round(model_promotion.predict_proba([[med,ipft1,ipft2,ret,total]])[0][1] *100,2)
+    msn_prob = round(model_msn.predict_proba([[med,ipft1,ipft2,ret,total]])[0][1]*100,2)
+    dict = {'instr':instr_prob,'promotion':promotion_prob,'msn':msn_prob}
+    serializer = SoldierSerializer(s)
+    print(serializer.data)
+    return Response(dict)
 
 @api_view(('GET',))
 def user_type(requst, id):
@@ -401,7 +449,7 @@ def report_download(request, off_id, sol_id):
                 cri[mark.sub_criteria.criteria.name] += mark.mark
             total += mark.mark
         cri['Total Marks'] = total
-
+        
         print(type(report[0].evaluation_date_from))
 
         context = {

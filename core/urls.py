@@ -14,8 +14,9 @@ from .views import (
     report_download,
     ReportForm,
     isReportFenerated,
-    SoldierExtraBySoldier
+    SoldierExtraBySoldier,
 )
+from . import views
 
 router = routers.DefaultRouter()
 router.register(r'soldiers', SolvierViewset)
@@ -34,7 +35,8 @@ urlpatterns = [
     path('report/soldier/<int:id>/', ReportForm.as_view(), name='report_form'),
     path('report/download/check/<int:id>/', isReportFenerated.as_view(), name='is_report_generated'),
     path('report/download/officer/<int:off_id>/soldier/<int:sol_id>/', report_download, name='report_download'),
-    path('soldier-extra/soldier/<int:id>/', SoldierExtraBySoldier.as_view(), name='soldier_extra')
+    path('soldier-extra/soldier/<int:id>/', SoldierExtraBySoldier.as_view(), name='soldier_extra'),
+    path('predict/<str:pk>',views.predict,name='predict')
 ]
 
 urlpatterns += router.urls
